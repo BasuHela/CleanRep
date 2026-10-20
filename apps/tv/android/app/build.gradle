@@ -1,0 +1,27 @@
+plugins { id 'com.android.application' }
+// The app runs the Java server itself (apps/core): it serves the phone on 8105 and 8443 and calls its own API over
+// loopback, so the origin is fixed.
+def apiOrigin = 'http://127.0.0.1:8105'
+android {
+ namespace 'org.cleanrep.tv'
+ compileSdk 35
+ defaultConfig { applicationId 'org.cleanrep.tv'; minSdk 25; targetSdk 35; versionCode 1; versionName '0.1.0'; buildConfigField 'String', 'API_ORIGIN', '"' + apiOrigin + '"' }
+ buildFeatures { buildConfig true }
+ signingConfigs { localDebug { storeFile file(System.getenv('CLEANREP_DEBUG_KEYSTORE') ?: '/tmp/amazon-devpost-cleanrep/android/debug.keystore'); storePassword 'android'; keyAlias 'androiddebugkey'; keyPassword 'android' } }
+ buildTypes {
+  debug { signingConfig signingConfigs.localDebug; manifestPlaceholders = [allowCleartext:'true'] }
+  release { minifyEnabled false; manifestPlaceholders = [allowCleartext:'false'] }
+ }
+ // The server's sources, plus the catalog, contracts and phone APK that scripts/tv-build.sh stages under cleanrep-home/.
+ sourceSets { main {
+  assets.srcDirs = ['../../../web/dist', 'build/generated/cleanrep-home-assets']
+  java.srcDirs += ['../../../core/src/main/java']
+ } }
+ // Stored, so the 8105 listener streams the phone APK straight from the TV's APK.
+ androidResources { noCompress 'apk' }
+ compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}
+// The server listens on loopback over plain HTTP, which the release manifest forbids, and debug builds log the pairing link.
+tasks.configureEach { if (name.toLowerCase().contains('release')) { doFirst {
+ throw new GradleException('CleanRep is debug-only for now: build it with assembleDebug')
+} } }

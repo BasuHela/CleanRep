@@ -1,0 +1,31 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "expected_version": {
+      "minimum": 0,
+      "title": "Expected Version",
+      "type": "integer"
+    },
+    "idempotency_key": {
+      "maxLength": 64,
+      "minLength": 8,
+      "pattern": "^[A-Za-z0-9:_-]+$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "request_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9:_-]+$",
+      "title": "Request Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "expected_version",
+    "idempotency_key",
+    "request_id"
+  ],
+  "title": "PairApprove",
+  "type": "object"
+}

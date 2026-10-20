@@ -1,0 +1,26 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "effort": {
+      "enum": [
+        "easy",
+        "ok",
+        "hard"
+      ],
+      "title": "Effort",
+      "type": "string"
+    },
+    "reps": {
+      "maximum": 30,
+      "minimum": 0,
+      "title": "Reps",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "reps",
+    "effort"
+  ],
+  "title": "SelfReport",
+  "type": "object"
+}

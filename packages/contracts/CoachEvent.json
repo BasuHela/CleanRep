@@ -1,0 +1,33 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "client_ts_ms": {
+      "maximum": 1000000000000000,
+      "minimum": 0,
+      "title": "Client Ts Ms",
+      "type": "integer"
+    },
+    "kind": {
+      "enum": [
+        "shallow",
+        "uncalibrated"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "set_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9:_-]+$",
+      "title": "Set Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "set_id",
+    "kind",
+    "client_ts_ms"
+  ],
+  "title": "CoachEvent",
+  "type": "object"
+}

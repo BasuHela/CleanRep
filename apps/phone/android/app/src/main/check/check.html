@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CleanRep Camera Check</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: #13211d;
+        color: #f4f7f5;
+      }
+      body {
+        margin: 0;
+        padding: 16px;
+        max-width: 640px;
+        margin-inline: auto;
+      }
+      h1 {
+        font-size: 1.25rem;
+        margin: 0 0 12px;
+      }
+      .controls {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      button {
+        padding: 10px 16px;
+        border-radius: 8px;
+        border: 1px solid #8ae5d5;
+        background: #193d30;
+        color: #f4f7f5;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+      button.primary {
+        background: #8ae5d5;
+        color: #13211d;
+      }
+      video {
+        width: 100%;
+        max-height: 360px;
+        background: #0c1613;
+        border-radius: 8px;
+        display: block;
+        margin-bottom: 12px;
+      }
+      dl {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        gap: 6px 12px;
+        margin: 0;
+        font-size: 0.9rem;
+        background: #182b26;
+        padding: 12px;
+        border-radius: 8px;
+      }
+      dt {
+        color: #9ec5bc;
+        font-weight: 600;
+      }
+      dd {
+        margin: 0;
+        word-break: break-all;
+        font-family: monospace;
+      }
+      #error {
+        margin-top: 12px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        background: #481c22;
+        color: #ffb3bd;
+        font-family: monospace;
+        white-space: pre-wrap;
+      }
+      #error[hidden] {
+        display: none;
+      }
+    </style>
+    <script src="/check.js" defer></script>
+  </head>
+  <body>
+    <h1>CleanRep Camera &amp; Pose Check</h1>
+    <div class="controls">
+      <button id="start" class="primary" type="button">Start camera</button>
+      <button id="stop" type="button">Stop</button>
+    </div>
+    <video id="video" muted playsinline></video>
+    <dl>
+      <dt>Origin</dt>
+      <dd id="origin">-</dd>
+      <dt>isSecureContext</dt>
+      <dd id="secure">-</dd>
+      <dt>Status</dt>
+      <dd id="status">Idle</dd>
+      <dt>Track settings</dt>
+      <dd id="settings">-</dd>
+      <dt>Worker delegate</dt>
+      <dd id="delegate">-</dd>
+      <dt>Results / sec</dt>
+      <dd id="fps">0.0</dd>
+      <dt>inference_ms</dt>
+      <dd id="inference">-</dd>
+      <dt>Landmarks</dt>
+      <dd id="landmarks">-</dd>
+      <dt>visibilityState</dt>
+      <dd id="visibility">-</dd>
+    </dl>
+    <div id="error" role="alert" hidden></div>
+  </body>
+</html>

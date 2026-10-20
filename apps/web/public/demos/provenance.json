@@ -1,0 +1,123 @@
+{
+  "generator": "scripts/demos/render_human_demos.py (Blender Cycles, side view, 960x540, 24 fps, H.264)",
+  "demonstrator": "Synthetic person generated with MPFB from MakeHuman CC0 core assets; not a real person.",
+  "license": "Rendered media: CC0-1.0 inputs; CleanRep project licence for the renders.",
+  "tools": {
+    "bpy": {
+      "version": "4.5.14",
+      "source": "https://pypi.org/project/bpy/4.5.14/",
+      "sha256": "1697c44362887e3b714f54035f1167131801249b8b46ff226b615be4ce9cabde",
+      "license": "GPL-2.0-or-later (build tool only; not shipped)"
+    },
+    "mpfb": {
+      "version": "2.0.18",
+      "source": "https://extensions.blender.org/add-ons/mpfb/",
+      "sha256": "c075b3e9b94b8e5556a5f03f4653602d02ea306de08126e8f55ed6dee28a2dad",
+      "license": "GPL-3.0-or-later (build tool only; not shipped)"
+    },
+    "makehuman_system_assets": {
+      "version": "makehuman_system_assets_cc0.zip, downloaded 2026-10-15",
+      "source": "https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html",
+      "sha256": "b542127a8e25547c7c29c19f2d1d2adb9a664c80396ecd694095dbc8028a0107",
+      "license": "CC0-1.0"
+    }
+  },
+  "assets_used": [
+    "MakeHuman base mesh and targets (bundled with MPFB; CC0 core assets)",
+    "skins/middleage_african_female",
+    "clothes/female_sportsuit01",
+    "clothes/shoes06",
+    "hair/ponytail01",
+    "eyebrows/eyebrow001"
+  ],
+  "files": {
+    "box_squat.mp4": {
+      "sha256": "da2a5c94e7ea2acc2701530ed6c4f1393da047bdd2d9fd27039e575eaf759792",
+      "bytes": 60454
+    },
+    "box_squat.jpg": {
+      "sha256": "5a389e902ce64e5d526b5807800a1624f09aa8b33c33f20f02afef5ecb4d30b0",
+      "bytes": 16710
+    },
+    "bridge_hold.mp4": {
+      "sha256": "9e7fdff0e231c8e817d02c95d32a8b90109e8d55d9c7f18b2a0ff5bc3ad6bf31",
+      "bytes": 22919
+    },
+    "bridge_hold.jpg": {
+      "sha256": "16040ade77099f4c1123e91a08d7d7b7b62016bfdb6f668a57ea9ccd973fca4c",
+      "bytes": 21026
+    },
+    "counterbalance_squat.mp4": {
+      "sha256": "c38419d8391bdd3091939b5335776843863a242e9718987b9a4e5b9f591d527d",
+      "bytes": 58014
+    },
+    "counterbalance_squat.jpg": {
+      "sha256": "ae9eb38eb9e20d4babf86807931c46b9c311a1826bb621a64584a56a39ab5167",
+      "bytes": 15090
+    },
+    "glute_bridge.mp4": {
+      "sha256": "72830ea33a24fd5f377b7a6998f6fe251ad229789ea7c620f854bc942fe29405",
+      "bytes": 57064
+    },
+    "glute_bridge.jpg": {
+      "sha256": "31351df179ca4c5f58a66ec81807051b8902b169ecb5c701bd4fe075e5a6810f",
+      "bytes": 20856
+    },
+    "incline_pushup.mp4": {
+      "sha256": "bdc21abdd3c27a0974dc0774721e6132d6bafd9995a9f1ad63dceaa6de3c4581",
+      "bytes": 46209
+    },
+    "incline_pushup.jpg": {
+      "sha256": "b4dfacf78cd02895395f5399232353b4171dc23dc6e2c8534704afcd61938a88",
+      "bytes": 20001
+    },
+    "incline_pushup_high.mp4": {
+      "sha256": "2563ef5dcb0edcfa549cdd598bc6c41deb534f65c538983002a86dd1dc016559",
+      "bytes": 38979
+    },
+    "incline_pushup_high.jpg": {
+      "sha256": "ca10910bbb551ffc8bd86e4daefa9910d160a3b9cb92614d4d5bcfd1a0a88201",
+      "bytes": 16992
+    },
+    "plank_hold.mp4": {
+      "sha256": "370c217b33499a183c5110a22310cc1bbbc1766658f39b87b902324c9ba614a0",
+      "bytes": 40088
+    },
+    "plank_hold.jpg": {
+      "sha256": "8d4b5192a363c4f4ea7ad92786bd5ce81e7865fb4f35c5301f15a362495a75de",
+      "bytes": 21271
+    },
+    "pushup.mp4": {
+      "sha256": "c34b39d10cea02881355bcf5735bc2a8ced34a0433a20738fa6620138b4ed503",
+      "bytes": 52803
+    },
+    "pushup.jpg": {
+      "sha256": "b734491e0d880427296579cdf7618b004836cd98cefb306879527d11ee419a28",
+      "bytes": 21089
+    },
+    "squat.mp4": {
+      "sha256": "b34afeae826b076f870bcf419eade077b0e136f10df4b96fb466f0760088cd3d",
+      "bytes": 62447
+    },
+    "squat.jpg": {
+      "sha256": "ff67aacf4ff5b5c89422669d3910646f400d4362bd9d1720886c4a66634fd9a2",
+      "bytes": 15169
+    },
+    "squat_jump.mp4": {
+      "sha256": "aa17e0df9e34ee29b76e2fdfdc7fc24c4e4895e3fa5949d0ec992cf56d15ab8a",
+      "bytes": 43850
+    },
+    "squat_jump.jpg": {
+      "sha256": "8742571c5502967bc005daa79fee972e343666553a8ccfdc6bac6993ed640f57",
+      "bytes": 12120
+    },
+    "tempo_squat.mp4": {
+      "sha256": "727396198151fe1c681d2868160dba2a9de4cc2fa95e3fab5328d325c43345f5",
+      "bytes": 78505
+    },
+    "tempo_squat.jpg": {
+      "sha256": "7828f381728e01ebd31d01e58d324c034c4efb0eaf888890b7ec157dbb95b550",
+      "bytes": 15699
+    }
+  }
+}

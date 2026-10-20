@@ -1,0 +1,11 @@
+import "./style.css";
+import "./phone/phone.css";
+import { tv } from "./tv/app";
+import { phone } from "./phone/app";
+import { applyTvViewport } from "./tv/viewport";
+const root = document.querySelector<HTMLElement>("#app")!;
+const isPhone = location.pathname === "/phone";
+if (!isPhone) applyTvViewport(document);
+document.body.classList.toggle("phone-app", isPhone);
+const dispose = isPhone ? phone(root) : tv(root);
+window.addEventListener("pagehide", dispose, { once: true });

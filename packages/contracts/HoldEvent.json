@@ -1,0 +1,51 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "aligned_s": {
+      "maximum": 60,
+      "minimum": 0,
+      "title": "Aligned S",
+      "type": "number"
+    },
+    "confidence": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "exercise_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9:_-]+$",
+      "title": "Exercise Id",
+      "type": "string"
+    },
+    "rated": {
+      "title": "Rated",
+      "type": "boolean"
+    },
+    "set_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9:_-]+$",
+      "title": "Set Id",
+      "type": "string"
+    },
+    "total_s": {
+      "maximum": 60,
+      "minimum": 0,
+      "title": "Total S",
+      "type": "number"
+    }
+  },
+  "required": [
+    "set_id",
+    "exercise_id",
+    "rated",
+    "confidence",
+    "aligned_s",
+    "total_s"
+  ],
+  "title": "HoldEvent",
+  "type": "object"
+}

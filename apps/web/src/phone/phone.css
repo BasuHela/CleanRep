@@ -1,0 +1,491 @@
+/* The phone: the TV's palette and type at hand-held scale. One column, one action per screen in the thumb zone,
+   lime only for what the camera measured. Scoped under .phone-app so the TV's 10-foot sizes stay untouched. */
+body.phone-app {
+  font-size: 17px;
+  line-height: 1.45;
+}
+body.phone-app #app {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+body.phone-app header.bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  max-width: 520px;
+  height: 56px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.phone-app .brand {
+  font-size: 22px;
+}
+.phone-app .link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--pill);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+.phone-app .link::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px var(--muted);
+}
+.phone-app .link.on {
+  color: var(--text);
+}
+.phone-app .link.on::before {
+  background: var(--text);
+  box-shadow: none;
+}
+.phone-app main.phone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 8px 20px 0;
+}
+.phone-app h1 {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 8px 0 6px;
+}
+.phone-app #status {
+  margin: 0 0 20px;
+  min-height: 1.45em;
+}
+.phone-app .small {
+  max-width: none;
+  margin: 12px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Controls at thumb size: 52px, the main action 56px and chalk-filled. */
+.phone-app button,
+.phone-app select,
+.phone-app .button {
+  min-height: 52px;
+  margin: 0;
+  padding: 0 20px;
+  border-radius: var(--pill);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+}
+.phone-app .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.phone-app button.primary,
+.phone-app .button.primary {
+  min-height: 56px;
+  background: var(--text);
+  color: var(--ink);
+  box-shadow: none;
+  font-size: 17px;
+  font-weight: 700;
+}
+/* The TV toggle names its own state, and the coral chip shows frames leaving, so no lime here: lime is for measurements. */
+.phone-app button.selected {
+  box-shadow: none;
+  color: var(--text);
+}
+/* After .primary and .selected, so a keyboard focus ring shows on every control. */
+.phone-app button:focus-visible,
+.phone-app select:focus-visible,
+.phone-app .button:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px var(--bg),
+    0 0 0 6px var(--measure);
+  transform: none;
+}
+.phone-app button:disabled {
+  cursor: not-allowed;
+}
+/* A tapped button keeps :hover on touch screens, so only a real pointer gets the hover fill. */
+@media (hover: hover) {
+  .phone-app button:not(.primary, .quiet):hover {
+    background: var(--raised);
+  }
+}
+.phone-app button.quiet {
+  align-self: center;
+  min-height: 44px;
+  margin: 4px 0 calc(8px + env(safe-area-inset-bottom));
+  padding: 0 8px;
+  background: none;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Each stage fills the screen, so its dock sits at the bottom even when the content is short. */
+.phone-app .stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.phone-app .dock {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+  padding: 20px 0 16px;
+  background: linear-gradient(to bottom, transparent, var(--bg) 20px);
+}
+.phone-app .dock button {
+  width: 100%;
+}
+
+/* The code: six boxes, as the TV shows six tiles. One real input lies over them, so typing, paste and autofill work. */
+.phone-app .code,
+.phone-app .code-box {
+  display: block;
+}
+.phone-app .code-box {
+  position: relative;
+}
+.phone-app .code input {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  font-size: 16px;
+}
+.phone-app .code input:focus-visible {
+  box-shadow: none;
+}
+.phone-app .code input::selection {
+  background: transparent;
+}
+.phone-app .cells {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+.phone-app .cells i {
+  display: grid;
+  place-items: center;
+  height: 68px;
+  border-radius: 14px;
+  background: var(--surface);
+  font-style: normal;
+  font-size: 32px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.phone-app .code.focus .cells i.next {
+  box-shadow: inset 0 0 0 2px var(--text);
+}
+.phone-app .code.focus .cells i.next:empty::after {
+  content: "";
+  width: 2px;
+  height: 30px;
+  background: var(--text);
+  animation: caret 1s steps(1) infinite;
+}
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+/* The match code is the one number to compare with the TV, so it is the largest thing on the screen. */
+.phone-app .match {
+  margin: 0;
+  font-size: 72px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The camera box: where to stand while the camera is off, the live view with its skeleton once it runs. */
+.phone-app .preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--panel);
+  overflow: hidden;
+  background: var(--frame);
+}
+.phone-app .preview.portrait {
+  width: auto;
+  height: min(56vh, 560px);
+  max-width: 100%;
+  margin: 0 auto;
+}
+.phone-app .preview.off {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 900 / 520 !important;
+}
+.phone-app .preview video,
+.phone-app .preview canvas,
+.phone-app .preview img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.phone-app .preview.off video,
+.phone-app .preview.off canvas,
+.phone-app .preview:not(.off) img {
+  display: none;
+}
+.phone-app .on-tv {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: var(--pill);
+  background: #0c1714d9;
+  font-size: 14px;
+  font-weight: 600;
+}
+/* Coral, like a recording light: the picture is leaving the phone. */
+.phone-app .on-tv::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--alert);
+}
+.phone-app #partial {
+  position: absolute;
+  top: 52px;
+  left: 12px;
+  right: 12px;
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: var(--flag);
+  color: var(--ink);
+  font-weight: 700;
+}
+.phone-app #partial:empty {
+  display: none;
+}
+.phone-app .count {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  align-items: baseline;
+  max-width: calc(100% - 24px);
+  margin: 0;
+  padding: 8px 14px 10px;
+  border-radius: 16px;
+  background: #0c1714d9;
+}
+.phone-app .count strong {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 0.95;
+  font-variant-numeric: tabular-nums;
+}
+.phone-app .count span {
+  font-size: 20px;
+  font-weight: 700;
+}
+.phone-app .count small {
+  flex-basis: 100%;
+  font-size: 13px;
+  color: var(--muted);
+}
+.phone-app .count small:empty {
+  display: none;
+}
+/* The three checks the TV's camera check waits for, big enough to read from where you stand. */
+.phone-app .checks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.phone-app .checks li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 68px;
+  padding: 8px 4px;
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  transition:
+    background-color 0.2s ease-out,
+    color 0.2s ease-out;
+}
+.phone-app .checks li::before {
+  content: "○";
+  font-size: 22px;
+  line-height: 1;
+}
+.phone-app .checks li.ok {
+  background: var(--measure);
+  color: var(--ink);
+}
+.phone-app .checks li.ok::before {
+  content: "✓";
+  font-weight: 800;
+}
+.phone-app .options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 0;
+}
+.phone-app .options > button,
+.phone-app .options > select {
+  flex: 1 1 auto;
+}
+.phone-app details.lens {
+  flex: 1 1 100%;
+}
+.phone-app details.lens summary {
+  padding: 8px 2px;
+  color: var(--muted);
+  font-weight: 600;
+  cursor: pointer;
+}
+.phone-app details.lens .options {
+  margin: 0;
+}
+
+/* The one-time certificate steps. */
+.phone-app dialog {
+  width: min(100% - 32px, 480px);
+  max-height: calc(100dvh - 32px);
+  padding: 24px 20px 20px;
+  border: 0;
+  border-radius: var(--panel);
+  background: var(--surface);
+  color: var(--text);
+}
+.phone-app dialog::backdrop {
+  background: #0c1714d9;
+}
+.phone-app dialog h2 {
+  margin: 0;
+  font-size: 22px;
+}
+.phone-app dialog .small {
+  margin: 6px 0 20px;
+}
+.phone-app dialog .steps > li {
+  grid-template-columns: 32px 1fr;
+  column-gap: 12px;
+  align-items: start;
+  margin: 0 0 16px;
+  font-size: 16px;
+}
+.phone-app dialog .steps > li::before {
+  width: 32px;
+  height: 32px;
+  font-size: 15px;
+}
+.phone-app dialog .steps small {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.phone-app dialog .button,
+.phone-app dialog form button {
+  width: 100%;
+}
+/* The dialog is surface-coloured, so its Close button steps up one fill. */
+.phone-app dialog form button {
+  background: var(--raised);
+}
+/* The no-code hint under the boxes. */
+.phone-app .code .small {
+  display: block;
+}
+/* Home mode: the TV's address under the code, the "which TV?" screen and the Chrome landing page. */
+.phone-app .tv-at {
+  margin: 4px 0 0;
+}
+.phone-app .paste {
+  display: block;
+  margin: 12px 0 8px;
+  font-weight: 600;
+}
+.phone-app #tv-link {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--chip);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 16px;
+}
+.phone-app #server-error {
+  min-height: 1.45em;
+  color: var(--alert);
+}
+.phone-app .landing .button {
+  margin-top: 20px;
+}
+.phone-app .landing .small a {
+  color: var(--text);
+  text-underline-offset: 3px;
+}

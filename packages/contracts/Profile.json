@@ -1,0 +1,58 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "equipment": {
+      "items": {
+        "enum": [
+          "chair",
+          "mat",
+          "counter"
+        ],
+        "type": "string"
+      },
+      "maxItems": 3,
+      "title": "Equipment",
+      "type": "array"
+    },
+    "go_easy": {
+      "items": {
+        "enum": [
+          "knees",
+          "wrists",
+          "lower_back"
+        ],
+        "type": "string"
+      },
+      "maxItems": 3,
+      "title": "Go Easy",
+      "type": "array"
+    },
+    "length_min": {
+      "default": 15,
+      "enum": [
+        10,
+        15,
+        20
+      ],
+      "title": "Length Min",
+      "type": "integer"
+    },
+    "no_floor": {
+      "default": false,
+      "title": "No Floor",
+      "type": "boolean"
+    },
+    "quiet": {
+      "default": true,
+      "title": "Quiet",
+      "type": "boolean"
+    },
+    "readiness_restricted": {
+      "default": false,
+      "title": "Readiness Restricted",
+      "type": "boolean"
+    }
+  },
+  "title": "Profile",
+  "type": "object"
+}

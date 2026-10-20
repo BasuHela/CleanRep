@@ -1,0 +1,506 @@
+{
+  "checks": {
+    "calibration_visibility": 0.5,
+    "full_body_rate": 0.9,
+    "light_rate": 0.8,
+    "luma_max": 220.0,
+    "luma_min": 40.0,
+    "margin": 0.02,
+    "rating_confidence": 0.65,
+    "side_rate": 0.8,
+    "side_ratio": 0.35,
+    "visibility": 0.5,
+    "window": 30.0
+  },
+  "exclusions": {
+    "knees": [
+      "squat_jump"
+    ],
+    "no_floor": [
+      "pushup",
+      "glute_bridge",
+      "bridge_hold"
+    ],
+    "quiet": [
+      "squat_jump"
+    ],
+    "readiness": [
+      "squat_jump",
+      "pushup"
+    ],
+    "wrists": [
+      "pushup",
+      "incline_pushup",
+      "incline_pushup_high"
+    ]
+  },
+  "exercises": {
+    "box_squat": {
+      "alignment": {},
+      "cue": "Sit back until you tap the chair, then stand.",
+      "drill": true,
+      "family": "squat",
+      "faults": [
+        "shallow_depth",
+        "forward_lean",
+        "rushed_descent"
+      ],
+      "loads": [
+        "knees",
+        "hips"
+      ],
+      "machine": {
+        "enter": 150.0,
+        "max_s": 8.0,
+        "min_depth_ratio": -0.65,
+        "min_s": 0.6,
+        "minimum": 140.0,
+        "reversal": 5.0,
+        "top": 160.0
+      },
+      "metrics": [
+        "knee_min_deg",
+        "depth_ratio",
+        "descent_s",
+        "trunk_lean_deg"
+      ],
+      "name": "Box squat to chair",
+      "rated": true,
+      "rep_seconds": 3.0,
+      "requires": [
+        "chair"
+      ]
+    },
+    "bridge_hold": {
+      "alignment": {
+        "maximum": 180.0,
+        "minimum": 160.0
+      },
+      "cue": "Lift the hips and hold.",
+      "drill": true,
+      "family": "hold",
+      "faults": [],
+      "loads": [
+        "lower_back",
+        "hips"
+      ],
+      "machine": null,
+      "metrics": [
+        "hip_ext_max_deg"
+      ],
+      "name": "Bridge hold",
+      "rated": true,
+      "rep_seconds": 1.0,
+      "requires": [
+        "floor"
+      ]
+    },
+    "counterbalance_squat": {
+      "alignment": {},
+      "cue": "Reach the arms forward.",
+      "drill": true,
+      "family": "squat",
+      "faults": [
+        "forward_lean"
+      ],
+      "loads": [
+        "knees",
+        "hips"
+      ],
+      "machine": {
+        "enter": 150.0,
+        "max_s": 8.0,
+        "min_depth_ratio": -0.65,
+        "min_s": 0.6,
+        "minimum": 140.0,
+        "reversal": 5.0,
+        "top": 160.0
+      },
+      "metrics": [
+        "knee_min_deg",
+        "depth_ratio",
+        "descent_s",
+        "trunk_lean_deg"
+      ],
+      "name": "Counterbalance squat",
+      "rated": true,
+      "rep_seconds": 3.0,
+      "requires": []
+    },
+    "glute_bridge": {
+      "alignment": {},
+      "cue": "Lift the hips and pause at the top.",
+      "drill": false,
+      "family": "bridge",
+      "faults": [
+        "incomplete_extension",
+        "no_pause"
+      ],
+      "loads": [
+        "lower_back",
+        "hips"
+      ],
+      "machine": {
+        "enter": 140.0,
+        "max_s": 10.0,
+        "min_depth_ratio": null,
+        "min_s": 0.8,
+        "minimum": 130.0,
+        "reversal": 5.0,
+        "top": 155.0
+      },
+      "metrics": [
+        "hip_ext_max_deg",
+        "top_hold_s"
+      ],
+      "name": "Glute bridge",
+      "rated": true,
+      "rep_seconds": 3.5,
+      "requires": [
+        "floor"
+      ]
+    },
+    "incline_pushup": {
+      "alignment": {},
+      "cue": "Hands on a sturdy chair or counter.",
+      "drill": false,
+      "family": "pushup",
+      "faults": [
+        "partial_range",
+        "hip_sag",
+        "hip_pike"
+      ],
+      "loads": [
+        "wrists",
+        "shoulders"
+      ],
+      "machine": {
+        "enter": 140.0,
+        "max_s": 8.0,
+        "min_depth_ratio": null,
+        "min_s": 0.6,
+        "minimum": 125.0,
+        "reversal": 5.0,
+        "top": 150.0
+      },
+      "metrics": [
+        "elbow_min_deg",
+        "hip_offset"
+      ],
+      "name": "Incline push-up",
+      "rated": true,
+      "rep_seconds": 3.0,
+      "requires": [
+        "chair_or_counter"
+      ]
+    },
+    "incline_pushup_high": {
+      "alignment": {},
+      "cue": "Hands on a sturdy counter or table edge.",
+      "drill": true,
+      "family": "pushup",
+      "faults": [
+        "partial_range",
+        "hip_sag",
+        "hip_pike"
+      ],
+      "loads": [
+        "wrists",
+        "shoulders"
+      ],
+      "machine": {
+        "enter": 140.0,
+        "max_s": 8.0,
+        "min_depth_ratio": null,
+        "min_s": 0.6,
+        "minimum": 125.0,
+        "reversal": 5.0,
+        "top": 150.0
+      },
+      "metrics": [
+        "elbow_min_deg",
+        "hip_offset"
+      ],
+      "name": "Higher incline push-up",
+      "rated": true,
+      "rep_seconds": 3.0,
+      "requires": [
+        "counter"
+      ]
+    },
+    "plank_hold": {
+      "alignment": {
+        "maximum": 0.06,
+        "minimum": -0.08
+      },
+      "cue": "Hold on forearms, or hands at an incline.",
+      "drill": true,
+      "family": "hold",
+      "faults": [],
+      "loads": [
+        "shoulders"
+      ],
+      "machine": null,
+      "metrics": [
+        "hip_offset"
+      ],
+      "name": "Plank hold",
+      "rated": true,
+      "rep_seconds": 1.0,
+      "requires": [
+        "plank_support"
+      ]
+    },
+    "pushup": {
+      "alignment": {},
+      "cue": "Lower and press through the hands.",
+      "drill": false,
+      "family": "pushup",
+      "faults": [
+        "partial_range",
+        "hip_sag",
+        "hip_pike"
+      ],
+      "loads": [
+        "wrists",
+        "shoulders"
+      ],
+      "machine": {
+        "enter": 140.0,
+        "max_s": 8.0,
+        "min_depth_ratio": null,
+        "min_s": 0.6,
+        "minimum": 125.0,
+        "reversal": 5.0,
+        "top": 150.0
+      },
+      "metrics": [
+        "elbow_min_deg",
+        "hip_offset"
+      ],
+      "name": "Floor push-up",
+      "rated": true,
+      "rep_seconds": 3.0,
+      "requires": [
+        "floor"
+      ]
+    },
+    "squat": {
+      "alignment": {},
+      "cue": "Sit back, then stand.",
+      "drill": false,
+      "family": "squat",
+      "faults": [
+        "shallow_depth",
+        "forward_lean",
+        "rushed_descent"
+      ],
+      "loads": [
+        "knees",
+        "hips"
+      ],
+      "machine": {
+        "enter": 150.0,
+        "max_s": 8.0,
+        "min_depth_ratio": -0.65,
+        "min_s": 0.6,
+        "minimum": 140.0,
+        "reversal": 5.0,
+        "top": 160.0
+      },
+      "metrics": [
+        "knee_min_deg",
+        "depth_ratio",
+        "descent_s",
+        "trunk_lean_deg"
+      ],
+      "name": "Bodyweight squat",
+      "rated": true,
+      "rep_seconds": 3.0,
+      "requires": []
+    },
+    "squat_jump": {
+      "alignment": {},
+      "cue": "Bend, jump and land softly.",
+      "drill": false,
+      "family": "squat",
+      "faults": [],
+      "loads": [
+        "knees",
+        "ankles"
+      ],
+      "machine": {
+        "enter": 145.0,
+        "max_s": 8.0,
+        "min_depth_ratio": -0.65,
+        "min_s": 0.6,
+        "minimum": 140.0,
+        "reversal": 5.0,
+        "top": 155.0
+      },
+      "metrics": [
+        "knee_min_deg",
+        "depth_ratio",
+        "descent_s",
+        "trunk_lean_deg"
+      ],
+      "name": "Squat jump",
+      "rated": false,
+      "rep_seconds": 2.5,
+      "requires": []
+    },
+    "tempo_squat": {
+      "alignment": {},
+      "cue": "Count three seconds down.",
+      "drill": true,
+      "family": "squat",
+      "faults": [
+        "rushed_descent"
+      ],
+      "loads": [
+        "knees",
+        "hips"
+      ],
+      "machine": {
+        "enter": 150.0,
+        "max_s": 8.0,
+        "min_depth_ratio": -0.65,
+        "min_s": 0.6,
+        "minimum": 140.0,
+        "reversal": 5.0,
+        "top": 160.0
+      },
+      "metrics": [
+        "knee_min_deg",
+        "depth_ratio",
+        "descent_s",
+        "trunk_lean_deg"
+      ],
+      "name": "Tempo squat",
+      "rated": true,
+      "rep_seconds": 5.0,
+      "requires": []
+    }
+  },
+  "faults": {
+    "forward_lean": {
+      "borderline_upper": null,
+      "comparator": "gt",
+      "drills": [
+        "counterbalance_squat"
+      ],
+      "metric": "trunk_lean_deg",
+      "priority": 2,
+      "threshold": 50.0
+    },
+    "hip_pike": {
+      "borderline_upper": null,
+      "comparator": "lt",
+      "drills": [
+        "plank_hold"
+      ],
+      "metric": "hip_offset",
+      "priority": 3,
+      "threshold": -0.08
+    },
+    "hip_sag": {
+      "borderline_upper": null,
+      "comparator": "gt",
+      "drills": [
+        "plank_hold"
+      ],
+      "metric": "hip_offset",
+      "priority": 2,
+      "threshold": 0.06
+    },
+    "incomplete_extension": {
+      "borderline_upper": null,
+      "comparator": "lt",
+      "drills": [
+        "bridge_hold"
+      ],
+      "metric": "hip_ext_max_deg",
+      "priority": 1,
+      "threshold": 160.0
+    },
+    "no_pause": {
+      "borderline_upper": null,
+      "comparator": "lt",
+      "drills": [
+        "bridge_hold"
+      ],
+      "metric": "top_hold_s",
+      "priority": 2,
+      "threshold": 1.0
+    },
+    "partial_range": {
+      "borderline_upper": null,
+      "comparator": "gt",
+      "drills": [
+        "incline_pushup_high"
+      ],
+      "metric": "elbow_min_deg",
+      "priority": 1,
+      "threshold": 110.0
+    },
+    "rushed_descent": {
+      "borderline_upper": null,
+      "comparator": "lt",
+      "drills": [
+        "tempo_squat"
+      ],
+      "metric": "descent_s",
+      "priority": 3,
+      "threshold": 0.8
+    },
+    "shallow_depth": {
+      "borderline_upper": -0.05,
+      "comparator": "lt",
+      "drills": [
+        "box_squat"
+      ],
+      "metric": "depth_ratio",
+      "priority": 1,
+      "threshold": -0.15
+    }
+  },
+  "metrics": {
+    "depth_ratio": {
+      "maximum": 2.0,
+      "minimum": -2.0
+    },
+    "descent_s": {
+      "maximum": 60.0,
+      "minimum": 0.0
+    },
+    "elbow_min_deg": {
+      "maximum": 180.0,
+      "minimum": 0.0
+    },
+    "hip_ext_max_deg": {
+      "maximum": 180.0,
+      "minimum": 0.0
+    },
+    "hip_offset": {
+      "maximum": 2.0,
+      "minimum": -2.0
+    },
+    "knee_min_deg": {
+      "maximum": 180.0,
+      "minimum": 0.0
+    },
+    "top_hold_s": {
+      "maximum": 60.0,
+      "minimum": 0.0
+    },
+    "trunk_lean_deg": {
+      "maximum": 180.0,
+      "minimum": 0.0
+    }
+  },
+  "smoothing": {
+    "beta": 0.01,
+    "d_cutoff": 1.0,
+    "min_cutoff": 1.0
+  }
+}

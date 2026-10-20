@@ -1,0 +1,87 @@
+{
+  "$defs": {
+    "Block": {
+      "additionalProperties": false,
+      "properties": {
+        "exercise_id": {
+          "maxLength": 80,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9:_-]+$",
+          "title": "Exercise Id",
+          "type": "string"
+        },
+        "hold_s": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Hold S"
+        },
+        "reps": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reps"
+        },
+        "rest_s": {
+          "title": "Rest S",
+          "type": "integer"
+        },
+        "sets": {
+          "title": "Sets",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "exercise_id",
+        "sets",
+        "rest_s"
+      ],
+      "title": "Block",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "blocks": {
+      "items": {
+        "$ref": "#/$defs/Block"
+      },
+      "maxItems": 30,
+      "minItems": 1,
+      "title": "Blocks",
+      "type": "array"
+    },
+    "rationale_tags": {
+      "items": {
+        "enum": [
+          "equipment",
+          "quiet",
+          "gentle",
+          "balanced",
+          "checkpoint"
+        ],
+        "type": "string"
+      },
+      "maxItems": 5,
+      "title": "Rationale Tags",
+      "type": "array"
+    }
+  },
+  "required": [
+    "blocks"
+  ],
+  "title": "PlanCandidate",
+  "type": "object"
+}

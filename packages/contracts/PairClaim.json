@@ -1,0 +1,24 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "claim_token": {
+      "maxLength": 100,
+      "minLength": 32,
+      "title": "Claim Token",
+      "type": "string"
+    },
+    "request_id": {
+      "maxLength": 80,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9:_-]+$",
+      "title": "Request Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "request_id",
+    "claim_token"
+  ],
+  "title": "PairClaim",
+  "type": "object"
+}

@@ -1,0 +1,29 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "cited_fact_ids": {
+      "items": {
+        "maxLength": 80,
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9:_-]+$",
+        "type": "string"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Cited Fact Ids",
+      "type": "array"
+    },
+    "text": {
+      "maxLength": 220,
+      "minLength": 1,
+      "title": "Text",
+      "type": "string"
+    }
+  },
+  "required": [
+    "text",
+    "cited_fact_ids"
+  ],
+  "title": "Explanation",
+  "type": "object"
+}

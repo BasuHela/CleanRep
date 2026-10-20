@@ -1,0 +1,19 @@
+/* A living room at night: cool, low-saturation greens (Fire TV guidance), chalk for text and focus,
+   lime only for what the camera measured and amber only for a flagged rep. Panels are told apart by fill, not lines. */
+:root {
+  --bg: #13211d;
+  --surface: #1b2d28;
+  --raised: #263b34;
+  --line: #3a514a;
+  --text: #eef2ee;
+  --muted: #a3b5ad;
+  --measure: #c8f27a;
+  --flag: #f2b84b;
+  --alert: #f08a6b;
+  --frame: #0c1714;
+  --ink: #10201b;
+  --font: "Figtree", Roboto, "Segoe UI", system-ui, sans-serif;
+  --pill: 999px;
+  --panel: 24px;
+  --chip: 12px;
+}

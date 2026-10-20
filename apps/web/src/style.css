@@ -1,0 +1,1005 @@
+@import url("./tokens.css");
+/* Figtree: open, geometric shapes that stay legible across a room. Variable weight 400-800, Latin subset, SIL OFL 1.1. */
+@font-face {
+  font-family: "Figtree";
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("/fonts/figtree-latin.woff2") format("woff2");
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+/* Fire TV: at least 28px text at 1080p, and every control and line of text inside the inner 90%. */
+button,
+select {
+  border: 0;
+  border-radius: var(--pill);
+  padding: 0 40px;
+  min-height: 80px;
+  margin: 0 16px 16px 0;
+  background: var(--surface);
+  color: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease-out,
+    background-color 0.15s ease-out;
+}
+button:hover {
+  background: var(--raised);
+}
+button.primary {
+  background: var(--raised);
+  box-shadow: inset 0 0 0 3px var(--text);
+}
+button.selected {
+  box-shadow: inset 0 0 0 3px var(--measure);
+  color: var(--measure);
+}
+/* Focus is the one chalk-filled control on screen, lifted and ringed in lime: findable from across the room. */
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 4px var(--bg),
+    0 0 0 8px var(--measure),
+    0 16px 40px #0009;
+}
+button:focus-visible {
+  background: var(--text);
+  color: var(--ink);
+  transform: scale(1.05);
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: wait;
+}
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  margin: 0 5vw;
+  padding-top: 5vh;
+  height: calc(5vh + 72px);
+}
+.brand {
+  color: var(--text);
+  font-weight: 800;
+  font-size: 40px;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+.brand span {
+  font-weight: 500;
+  color: var(--muted);
+}
+.rail {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: var(--muted);
+  font-size: 28px;
+}
+.rail ol {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.rail li {
+  width: 48px;
+  height: 8px;
+  border-radius: var(--pill);
+  background: var(--raised);
+}
+.rail li.done {
+  background: var(--muted);
+}
+.rail li.now {
+  background: var(--measure);
+}
+.mode {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 24px;
+  border-radius: var(--pill);
+  background: var(--surface);
+  font-size: 28px;
+  color: var(--muted);
+}
+.mode::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px var(--muted);
+}
+.mode.on {
+  color: var(--text);
+}
+.mode.on::before {
+  background: var(--measure);
+  box-shadow: none;
+}
+/* Tall screens scroll inside the section; focus moves scroll the focused control into view. */
+section {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 24px 5vw;
+}
+h1 {
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  margin: 0 0 8px;
+  max-width: 1500px;
+}
+h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 32px 0 16px;
+}
+.subtitle {
+  color: var(--muted);
+  margin: 0 0 32px;
+  max-width: 1400px;
+}
+/* A title without a subtitle still needs room before what follows it. */
+h1 + .content,
+h1 + .error {
+  margin-top: 32px;
+}
+.content {
+  max-width: 1728px;
+}
+/* About 80 characters a line at 32px. */
+.content > p {
+  max-width: 1350px;
+}
+.small {
+  font-size: 28px;
+  color: var(--muted);
+  max-width: 1300px;
+}
+.error {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 1500px;
+  margin: 0 0 24px;
+  padding: 16px 28px;
+  border-radius: var(--chip);
+  background: #3a2119;
+  font-size: 30px;
+}
+.error::before {
+  content: "!";
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--alert);
+  color: var(--ink);
+  font-weight: 800;
+}
+.card {
+  background: var(--surface);
+  border-radius: var(--panel);
+  padding: 32px 40px;
+  margin: 0 0 24px;
+}
+.badge {
+  display: inline-block;
+  padding: 6px 20px;
+  border-radius: var(--pill);
+  background: var(--raised);
+  font-size: 28px;
+  color: var(--muted);
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+/* Numbered only where the content is a sequence: pairing, the plan's order. */
+.steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 0 0 32px;
+  padding: 0;
+}
+.steps > li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  column-gap: 24px;
+  align-items: center;
+  margin: 0 0 20px;
+}
+.steps > li::before {
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--raised);
+  font-weight: 700;
+  font-size: 28px;
+}
+/* Home: title and actions on the left, the phone's skeleton at the depth it checks on the right, drawn in once. */
+section.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 600px;
+  column-gap: 96px;
+  align-content: center;
+}
+section.hero > * {
+  grid-column: 1;
+}
+section.hero .content {
+  display: contents;
+}
+section.hero .figure {
+  grid-column: 2;
+  grid-row: 1 / span 4;
+  align-self: center;
+}
+section.hero h1 {
+  font-size: 72px;
+}
+section.hero h1 span {
+  display: block;
+}
+.actions {
+  margin-top: 16px;
+}
+.figure {
+  width: 100%;
+  background: var(--surface);
+  border-radius: var(--panel);
+}
+.figure .bones path {
+  fill: none;
+  stroke: var(--measure);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  animation: draw 1.4s ease-out both;
+}
+.figure .head {
+  fill: none;
+  stroke: var(--measure);
+  stroke-width: 8;
+}
+.figure .joints circle {
+  fill: var(--surface);
+  stroke: var(--measure);
+  stroke-width: 6;
+  animation: appear 0.4s 1.2s both;
+}
+.figure .guide {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 3;
+  stroke-dasharray: 10 8;
+}
+.figure .arc {
+  stroke: var(--text);
+  stroke-width: 4;
+  stroke-dasharray: none;
+}
+.figure .floor {
+  stroke: var(--line);
+  stroke-width: 4;
+}
+.figure .note {
+  fill: var(--muted);
+  font-family: var(--font);
+  font-size: 30px;
+}
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* Pairing, like a TV sign-in screen: the steps on the left, one tile per code digit on the right. */
+.pairing {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 64px;
+  align-items: center;
+  margin: 0 0 32px;
+}
+/* The QR opens the phone page with the code filled in; typing the address is the fallback. */
+.join {
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+.join p {
+  margin: 0;
+}
+.join .lead {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.join .alt {
+  color: var(--muted);
+}
+.qr {
+  display: block;
+  width: 270px;
+  height: 270px;
+  border-radius: 16px;
+}
+/* A hosted address is long and has no spaces: break it evenly rather than at its hyphens. */
+.join .url {
+  margin-top: 8px;
+  font-weight: 700;
+  color: var(--text);
+  word-break: break-all;
+}
+.pair-code {
+  display: flex;
+  gap: 16px;
+}
+.pair-code span {
+  display: grid;
+  place-items: center;
+  width: 120px;
+  height: 160px;
+  border-radius: 20px;
+  background: var(--surface);
+  font-weight: 800;
+  font-size: 104px;
+  font-variant-numeric: tabular-nums;
+}
+.card.approve {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  background: var(--raised);
+  box-shadow: inset 0 0 0 3px var(--measure);
+}
+.card.approve strong {
+  font-weight: 800;
+  font-size: 56px;
+  letter-spacing: 0.08em;
+}
+.card.approve button {
+  margin: 0 0 0 auto;
+}
+/* Check-in: one row per question */
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  max-width: 1500px;
+  margin: 0 0 12px;
+  padding: 12px 12px 12px 36px;
+  border-radius: var(--panel);
+  background: var(--surface);
+}
+.question p {
+  margin: 0;
+}
+.question button {
+  margin: 0;
+  min-width: 140px;
+}
+/* A button on a panel needs a lighter fill to read as one; focus still fills it chalk. */
+.question button:not(:focus-visible) {
+  background: var(--raised);
+}
+/* The plan, in the order it runs */
+.plan {
+  list-style: none;
+  counter-reset: block;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0 32px;
+  padding: 0;
+}
+.plan li {
+  counter-increment: block;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  column-gap: 24px;
+  align-items: center;
+  padding: 20px 28px;
+  border-radius: 20px;
+  background: var(--surface);
+}
+.plan li::before {
+  content: counter(block);
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--raised);
+  font-weight: 700;
+  font-size: 28px;
+}
+.plan strong {
+  font-weight: 700;
+}
+.plan span {
+  color: var(--muted);
+  font-size: 28px;
+}
+.plan b {
+  font-weight: 800;
+  color: var(--text);
+}
+.camera-check {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.checks {
+  margin: 0 0 32px;
+}
+.check {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 0 0 16px;
+  color: var(--muted);
+}
+.check span {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 3px var(--line);
+  font-weight: 800;
+  font-size: 28px;
+}
+.check.on {
+  color: var(--text);
+}
+.check.on span {
+  background: var(--measure);
+  box-shadow: none;
+  color: var(--ink);
+}
+.placement {
+  width: 100%;
+  border-radius: var(--panel);
+}
+/* Demo and live set */
+.exercise-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.demo-media {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+.demo {
+  width: 100%;
+  max-height: 440px;
+  /* 16:9 renders in a slightly wider box: trim the studio backdrop instead of showing side bars. */
+  object-fit: cover;
+  background: var(--frame);
+  border-radius: var(--panel);
+}
+.live-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.big-number {
+  font-weight: 800;
+  font-size: 200px;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.big-number .of {
+  font-weight: 600;
+  font-size: 80px;
+  letter-spacing: 0;
+  color: var(--muted);
+  margin-left: 16px;
+}
+.big-number small {
+  display: block;
+  margin-top: 12px;
+  font-weight: 500;
+  font-size: 30px;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+.countdown {
+  margin: 0;
+  font-weight: 800;
+  font-size: 96px;
+  line-height: 1.1;
+  color: var(--measure);
+  font-variant-numeric: tabular-nums;
+}
+.countdown:empty {
+  display: none;
+}
+.confidence {
+  color: var(--muted);
+  font-size: 30px;
+  margin: 0 0 16px;
+}
+.confidence.rated {
+  color: var(--measure);
+}
+/* The tally: one mark per rep, filled as the phone counts. */
+.tally {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 24px 0;
+  padding: 0;
+}
+.tally li {
+  width: 44px;
+  height: 72px;
+  border-radius: var(--chip);
+  box-shadow: inset 0 0 0 3px var(--line);
+}
+.tally .clean {
+  background: var(--measure);
+  box-shadow: none;
+}
+.tally .fault {
+  background: var(--flag);
+  box-shadow: none;
+}
+.tally .unrated {
+  box-shadow: inset 0 0 0 3px var(--muted);
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0 8px,
+    var(--line) 8px 12px
+  );
+}
+.set-tally .tally {
+  margin: 0 0 12px;
+}
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin: 0 0 24px;
+  font-size: 28px;
+  color: var(--muted);
+}
+.legend span::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 30px;
+  margin-right: 12px;
+  vertical-align: -5px;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 3px var(--muted);
+}
+.legend .clean::before {
+  background: var(--measure);
+  box-shadow: none;
+}
+.legend .fault::before {
+  background: var(--flag);
+  box-shadow: none;
+}
+[data-mirror-slot]:empty,
+[data-rep-feedback-slot]:empty {
+  display: none;
+}
+.mirror-panel {
+  margin: 0;
+  border-radius: var(--panel);
+  overflow: hidden;
+  background: var(--frame);
+}
+/* 16:9 at the column's width until the first frame arrives; the TV then sets the frame's own shape inline. */
+.mirror-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--frame);
+}
+.mirror-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 40px;
+  text-align: center;
+}
+.mirror-hint p {
+  margin: 0;
+  font-size: 30px;
+  color: var(--muted);
+}
+/* An upright phone sends tall frames: the panel takes their shape at a height that fits under the title, and the caption wraps to its width. */
+.mirror-panel.portrait {
+  width: min-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.mirror-panel.portrait .mirror-frame {
+  width: auto;
+  height: 46vh;
+}
+.mirror-panel.portrait .mirror-hint {
+  padding: 16px;
+}
+.mirror-panel.portrait .rep-feedback {
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 14px;
+}
+.mirror-panel.portrait .rep-symbol {
+  font-size: 44px;
+}
+.mirror-panel.portrait .rep-label {
+  font-size: 28px;
+}
+/* Until the first frame arrives, show the dark frame, not a broken-image icon and its alt text. */
+.mirror-frame img:not([src]) {
+  visibility: hidden;
+}
+.mirror-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.mirror-panel figcaption {
+  padding: 12px 24px;
+  font-size: 28px;
+  background: var(--surface);
+  color: var(--muted);
+}
+.rep-feedback {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 28px;
+  border-radius: var(--pill);
+  font-weight: 700;
+  box-shadow: 0 8px 24px #0008;
+}
+.mirror-frame .rep-feedback {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 2;
+}
+.rep-feedback.clean {
+  background: var(--measure);
+  color: var(--ink);
+}
+.rep-feedback.fault {
+  background: var(--flag);
+  color: var(--ink);
+}
+.rep-symbol {
+  font-weight: 800;
+  font-size: 56px;
+  line-height: 1;
+}
+.rep-label {
+  font-size: 30px;
+}
+/* Set summary and recap */
+.summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 8px 56px;
+}
+.summary h2 {
+  grid-column: 1 / -1;
+  margin: 0 0 8px;
+  font-size: 40px;
+}
+.summary .explain p {
+  margin: 0 0 16px;
+}
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 56px;
+}
+.stats p {
+  margin: 0;
+  font-size: 30px;
+  color: var(--muted);
+}
+.stats strong {
+  display: block;
+  font-weight: 800;
+  font-size: 112px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+/* Fault counts on the summary share the amber of the flagged reps in the tally above. */
+.summary .stats strong {
+  color: var(--flag);
+}
+.stats.recap {
+  gap: 16px;
+  margin: 8px 0 32px;
+}
+.stats.recap p {
+  min-width: 320px;
+  padding: 28px 36px;
+  border-radius: var(--panel);
+  background: var(--surface);
+}
+.stats.recap strong {
+  font-size: 120px;
+}
+.next {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.rest {
+  margin: 0 40px 16px 0;
+  font-weight: 700;
+  font-size: 48px;
+  font-variant-numeric: tabular-nums;
+}
+.verdict {
+  font-size: 32px;
+  max-width: 1500px;
+}
+[data-verdict="improved"] {
+  color: var(--measure);
+}
+[data-verdict="worse"] {
+  color: var(--flag);
+}
+.next-time {
+  max-width: 1400px;
+}
+.pulse {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-size: 36px;
+  color: var(--muted);
+}
+.pulse::before {
+  content: "";
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 6px solid var(--raised);
+  border-top-color: var(--measure);
+  animation: spin 0.9s linear infinite;
+}
+footer {
+  flex: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  margin: 0 5vw;
+  padding: 16px 0 5vh;
+  color: var(--muted);
+  font-size: 28px;
+}
+.hints {
+  display: flex;
+  gap: 40px;
+}
+footer button {
+  margin: 0;
+  min-height: 64px;
+  padding: 0 32px;
+  font-size: 28px;
+}
+.modal {
+  position: fixed;
+  inset: 8%;
+  padding: 48px;
+  background: var(--surface);
+  border-radius: var(--panel);
+  box-shadow: 0 0 0 200px #000b;
+  overflow: auto;
+}
+.modal pre {
+  font-size: 28px;
+  white-space: pre-wrap;
+}
+/* Over the exercise title, never the controls: at the bottom it hid the focused End set button. */
+.coach-banner {
+  position: fixed;
+  left: 5vw;
+  right: 5vw;
+  top: calc(5vh + 82px);
+  margin: 0;
+  padding: 18px 32px;
+  border-radius: 20px;
+  background: var(--flag);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: clamp(32px, 2vw, 44px);
+  font-weight: 700;
+  box-shadow: 0 12px 32px #0009;
+  pointer-events: none;
+}
+/* The phone's styles are in phone/phone.css. */
+[hidden] {
+  display: none !important;
+}
+@media (max-width: 750px) {
+  body {
+    font-size: 21px;
+  }
+  header {
+    margin: 0 20px;
+    padding-top: 0;
+    height: 72px;
+    gap: 12px;
+  }
+  .brand {
+    font-size: 30px;
+  }
+  .rail span {
+    display: none;
+  }
+  .badge,
+  .mode {
+    font-size: 15px;
+  }
+  .mode {
+    padding: 6px 14px;
+  }
+  h1,
+  section.hero h1 {
+    font-size: 36px;
+  }
+  section {
+    padding: 20px;
+    overflow: visible;
+  }
+  button,
+  select {
+    padding: 0 22px;
+    font-size: 20px;
+    min-height: 52px;
+    margin: 0 10px 10px 0;
+  }
+  .small {
+    font-size: 17px;
+  }
+  section.hero,
+  .pairing,
+  .plan,
+  .camera-check,
+  .exercise-grid,
+  .live-grid,
+  .demo-media,
+  .summary {
+    grid-template-columns: 1fr;
+  }
+  section.hero .figure {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .question {
+    gap: 14px;
+    padding-left: 20px;
+  }
+  .question p {
+    font-size: 21px;
+  }
+  .question button {
+    min-width: 80px;
+  }
+  .pair-code span {
+    width: 48px;
+    height: 64px;
+    border-radius: 10px;
+    font-size: 40px;
+  }
+  .big-number {
+    font-size: 110px;
+  }
+  .stats strong,
+  .stats.recap strong {
+    font-size: 64px;
+  }
+  .stats.recap p {
+    min-width: 0;
+    padding: 16px 20px;
+  }
+  .tally li {
+    width: 22px;
+    height: 36px;
+    border-radius: 6px;
+  }
+  #app {
+    display: block;
+    height: auto;
+  }
+  footer {
+    margin: 0 20px;
+    padding: 12px 0;
+    font-size: 15px;
+  }
+  .coach-banner {
+    top: 80px;
+    left: 20px;
+    right: 20px;
+    font-size: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

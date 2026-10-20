@@ -1,0 +1,15 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "pairing_code": {
+      "pattern": "^\\d{6}$",
+      "title": "Pairing Code",
+      "type": "string"
+    }
+  },
+  "required": [
+    "pairing_code"
+  ],
+  "title": "PairRequest",
+  "type": "object"
+}

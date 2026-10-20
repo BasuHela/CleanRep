@@ -1,0 +1,40 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "delegate": {
+      "enum": [
+        "GPU",
+        "CPU"
+      ],
+      "title": "Delegate",
+      "type": "string"
+    },
+    "fps": {
+      "maximum": 240,
+      "minimum": 0,
+      "title": "Fps",
+      "type": "number"
+    },
+    "full_body": {
+      "title": "Full Body",
+      "type": "boolean"
+    },
+    "light": {
+      "title": "Light",
+      "type": "boolean"
+    },
+    "side_view": {
+      "title": "Side View",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "full_body",
+    "side_view",
+    "light",
+    "fps",
+    "delegate"
+  ],
+  "title": "CameraCheck",
+  "type": "object"
+}

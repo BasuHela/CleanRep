@@ -1,0 +1,14 @@
+plugins { id 'com.android.application' }
+android {
+ namespace 'org.cleanrep.phone'
+ compileSdk 35
+ buildToolsVersion '35.0.0'
+ defaultConfig { applicationId 'org.cleanrep.phone'; minSdk 28; targetSdk 35; versionCode 1; versionName '0.1.0' }
+ signingConfigs { localDebug { storeFile file(System.getenv('CLEANREP_DEBUG_KEYSTORE') ?: '/tmp/amazon-devpost-cleanrep/android/debug.keystore'); storePassword 'android'; keyAlias 'androiddebugkey'; keyPassword 'android' } }
+ buildTypes {
+  debug { signingConfig signingConfigs.localDebug }
+  release { minifyEnabled false }
+ }
+ sourceSets { main { assets.srcDirs = ['../../../web/dist', 'src/main/check'] } }
+ compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+}

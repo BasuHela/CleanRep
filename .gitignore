@@ -1,0 +1,11 @@
+var/
+node_modules/
+dist/
+.env
+apps/web/public/vision/
+apps/web/test-results/
+apps/web/playwright-report/
+.gradle/
+**/build/
+local.properties
+temp/
