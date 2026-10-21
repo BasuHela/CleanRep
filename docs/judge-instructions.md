@@ -2,7 +2,7 @@
 
 CleanRep needs a Fire OS device and, for the camera, an Android phone on the same Wi-Fi. With no Android phone, you can still run a full session with the remote alone (path B). There is also a 3-minute desktop path with no devices at all (path D).
 
-**Status, honestly:** these steps follow the code and its automated tests. **Not one of them has yet been run end to end on a device** in this exact build: see [device-tests.md](device-tests.md), where every test reads NOT RUN until it is done. The earlier version, with its server on a laptop, ran one live set with a phone and the Fire OS app on the emulator on 19 Oct. If something here fails, path B and path D still show the session.
+**Status, honestly:** these steps follow the code and its automated tests. **Path A has not yet run on a real Fire TV.** On 21 Oct, the developer reports that a real Android phone paired from the QR code over Wi-Fi with the TV app on the emulator, and that it worked as expected (test 3b in [device-tests.md](device-tests.md)). The earlier version, with its server on a laptop, ran one live set with a phone and the Fire OS app on the emulator on 19 Oct. If something here fails, path B and path D still show the session.
 
 ## What you need
 
@@ -59,9 +59,11 @@ Install the TV app as in A.1. On the pairing screen, select **Use remote only**.
 
 ## C. The Android TV emulator instead of a Fire TV
 
-The emulator is a stand-in, since Amazon offers no Fire OS emulator ([friction log](friction-log.md) FL-003). We use an Android TV API 30 image with 2 GB of RAM. Its network is private, so the phone reaches it through adb relays on the computer. That is test 3 in [device-tests.md](device-tests.md), with every command. In short:
+The emulator is a stand-in, since Amazon offers no Fire OS emulator ([friction log](friction-log.md) FL-003). We use an Android TV API 30 image with 2 GB of RAM. Its network is private, so the phone reaches it through adb relays on the computer. Path A needs none of these relays: a real Fire TV is on the home Wi-Fi itself. Its Google Cast service holds port 8443, which the TV app needs, so the first two lines below turn Cast off on the emulator ([FL-007](friction-log.md)). Fire OS has no Google Cast, so a real Fire TV doesn't need this. That is test 3 in [device-tests.md](device-tests.md), with every command. In short:
 
 ```sh
+adb -s emulator-5554 shell pm disable-user --user 0 com.google.android.apps.mediashell
+adb -s emulator-5554 shell am force-stop com.google.android.apps.mediashell
 adb -s emulator-5554 install -r cleanrep-tv-0.1.0-debug.apk
 adb -s emulator-5554 logcat -s CleanRep                 # prints the phone link, with the pin
 adb -s emulator-5554 forward tcp:8443 tcp:8443
@@ -71,6 +73,8 @@ adb -s <phone-serial> shell am start -a android.intent.action.VIEW -d "'cleanrep
 ```
 
 The phone APK for this path is on the Releases page too, because the emulator's QR code names an address the phone can't reach.
+
+**With no debugging on the phone:** from a checkout of this repository, `make lan-relay` puts the emulator's TV on the computer's Wi-Fi. The TV app, told the computer's address at launch, puts that address in its QR code. The phone then pairs from the QR code alone, as in A.2. This is test 3b in [device-tests.md](device-tests.md). It needs a firewall rule on the computer, and a Wi-Fi network that lets devices reach each other.
 
 ## D. Desktop browser only (about 3 minutes, no devices)
 
@@ -89,8 +93,9 @@ make demo
 |---|---|
 | The phone says *Check that this phone is on the same Wi-Fi as the CleanRep server* | Put both devices on the same network, not a guest network |
 | *This TV's security key has changed. Scan the QR code on your TV again.* | The TV made a new certificate (for example, after reinstalling). Scan again |
-| The pairing code has expired | Select **Start a session** again on the TV |
+| The pairing code has expired (it lasts 5 minutes) | On the TV, select **Start over**, then **Start a session** |
 | The phone's camera stays black | Check that Android granted CleanRep the camera, then tap **Enable camera** again |
 | Nothing happens on the TV | CleanRep is controlled by the D-pad and Select. Back pauses the session; Menu shows session details |
+| On the emulator, the TV says *CleanRep's server on this TV isn't answering*, and `adb logcat -s CleanRep` shows `EADDRINUSE` | Google Cast holds port 8443. Run the two `mediashell` lines in path C, then close and reopen CleanRep |
 
 Privacy and network details: [SECURITY.md](../SECURITY.md). Known limits: [LIMITATIONS.md](../LIMITATIONS.md).

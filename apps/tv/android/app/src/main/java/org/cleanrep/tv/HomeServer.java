@@ -3,6 +3,7 @@ package org.cleanrep.tv;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.os.Build;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.util.Base64;
@@ -36,6 +37,8 @@ import org.cleanrep.core.http.TlsIdentity;
 final class HomeServer {
   static final int HTTP_PORT = 8105;
   static final int HTTPS_PORT = 8443;
+  /** The launch extra that names the relay address on the emulator (see {@link #rememberLanHost}). */
+  static final String LAN_HOST_EXTRA = "cleanrep.lan_host";
   private static final String KEY_ALIAS = "cleanrep_tls_password";
   private static final org.cleanrep.core.http.Log LOG = (message, error) -> {
     if (error == null) Log.w("CleanRep", message);
@@ -58,7 +61,11 @@ final class HomeServer {
       TlsIdentity tls = TlsIdentity.loadOrCreate(new File(app.getFilesDir(), "tv-identity.p12"), password(app),
           new SecureRandom(), System.currentTimeMillis(), LOG);
       bound = Listeners.bind(InetAddress.getByName("0.0.0.0"), HTTP_PORT, tls, HTTPS_PORT);
-      String address = Listeners.lanAddress();
+      String relay = isEmulator() ? prefs(app).getString("lan_host", null) : null;
+      String address = Listeners.isPrivateIPv4(relay) ? relay : Listeners.lanAddress();
+      if (address != null && address.equals(relay)) {
+        Log.i("CleanRep", "CleanRep: emulator: phones reach this TV through the relay at " + relay + " (forget it with --es " + LAN_HOST_EXTRA + " \"\")");
+      }
       CoreConfig config = CoreConfig.builder(new File(app.getFilesDir(), "home-data"), HomeAssets.resources(assets::open))
           .origin("http://127.0.0.1:" + HTTP_PORT)
           .extraOrigins(Listeners.phoneOrigins(address, HTTPS_PORT))
@@ -83,6 +90,35 @@ final class HomeServer {
     }
   }
 
+  /**
+   * The emulator only: remembers the address phones dial instead of this device's own. The emulator's address
+   * (10.0.2.x) is private to the laptop, so `scripts/lan-relay.mjs` puts 8105 and 8443 on the laptop's Wi-Fi address,
+   * and the QR code, the pairing link and the allowed phone origins must name that address. null leaves it as it is,
+   * "" forgets it, and anything but a private IPv4 literal is refused. On real hardware it does nothing, because any
+   * app may launch this activity with extras. Call it before {@link #start}.
+   */
+  static void rememberLanHost(Context context, String host) {
+    if (host == null || !isEmulator()) return;
+    SharedPreferences prefs = prefs(context.getApplicationContext());
+    if (host.isEmpty()) {
+      prefs.edit().remove("lan_host").commit();
+      Log.i("CleanRep", "CleanRep: emulator: relay address forgotten");
+    } else if (Listeners.isPrivateIPv4(host)) {
+      prefs.edit().putString("lan_host", host).commit();
+    } else {
+      Log.w("CleanRep", "CleanRep: emulator: ignored " + LAN_HOST_EXTRA + ", which must be a private IPv4 address");
+    }
+  }
+
+  /** The Android emulator's virtual boards; no Fire TV reports these. */
+  private static boolean isEmulator() {
+    return "ranchu".equals(Build.HARDWARE) || "goldfish".equals(Build.HARDWARE);
+  }
+
+  private static SharedPreferences prefs(Context app) {
+    return app.getSharedPreferences("cleanrep_home", Context.MODE_PRIVATE);
+  }
+
   /** The certificate's pin for the pairing QR code, or "" when the server is not running. */
   static String fingerprint() {
     return fingerprint;
@@ -99,7 +135,7 @@ final class HomeServer {
 
   /** The PKCS#12 password: random, kept encrypted under an Android Keystore AES-GCM key, as MainActivity keeps the session. */
   private static char[] password(Context app) throws Exception {
-    SharedPreferences prefs = app.getSharedPreferences("cleanrep_home", Context.MODE_PRIVATE);
+    SharedPreferences prefs = prefs(app);
     String data = prefs.getString("data", null);
     String iv = prefs.getString("iv", null);
     if (data != null && iv != null) {

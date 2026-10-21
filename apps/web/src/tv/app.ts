@@ -343,7 +343,11 @@ export function tv(root: HTMLElement): () => void {
             window.CleanRepNative?.apiOrigin() ?? location.origin,
             view.phone_url,
           );
-          content = `<div class="pairing"><div class="join">${qrSvg(phoneLink(url, view.pairing_code, window.CleanRepNative?.tlsFingerprint?.() ?? ""), "QR code that opens the CleanRep phone page with this code")}<div><p class="lead">Scan with your phone's camera</p><p class="alt">Or open this address</p><p class="url">${e(url)}</p></div></div><div class="pair-code">${Array.from(view.pairing_code, (c) => `<span>${e(c)}</span>`).join("")}</div></div>${view.pairing_requests.map((r) => `<div class="card approve">Verify both screens show <strong>${e(r.verification_code)}</strong>${button("approve:" + r.request_id, "Approve phone", "primary")}</div>`).join("")}${button("remote", "Use remote only")}`;
+          // The code is issued once per session and lasts 5 minutes; in the lobby an empty code has expired, and
+          // Back here leaves the app, so Start over (End and delete) is the way to a new one.
+          content = view.pairing_code
+            ? `<div class="pairing"><div class="join">${qrSvg(phoneLink(url, view.pairing_code, window.CleanRepNative?.tlsFingerprint?.() ?? ""), "QR code that opens the CleanRep phone page with this code")}<div><p class="lead">Scan with your phone's camera</p><p class="alt">Or open this address</p><p class="url">${e(url)}</p></div></div><div class="pair-code">${Array.from(view.pairing_code, (c) => `<span>${e(c)}</span>`).join("")}</div></div>${view.pairing_requests.map((r) => `<div class="card approve">Verify both screens show <strong>${e(r.verification_code)}</strong>${button("approve:" + r.request_id, "Approve phone", "primary")}</div>`).join("")}${button("remote", "Use remote only")}`
+            : `<p class="lead">This pairing code has expired. Start over for a new one.</p>${button("delete", "Start over", "primary")}${button("remote", "Use remote only")}`;
           break;
         }
         case "READINESS":

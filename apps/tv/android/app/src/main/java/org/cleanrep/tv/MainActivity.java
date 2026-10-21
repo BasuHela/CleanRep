@@ -110,7 +110,9 @@ public final class MainActivity extends Activity {
   web.setFocusable(true);web.setFocusableInTouchMode(true);web.requestFocus();
   web.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
   // The page's first API call goes to this app's own server, so load it once the listeners are up (or failed).
-  final WebView page=web;new Thread(()->{HomeServer.start(this);runOnUiThread(()->{if(!destroyed&&web==page)page.loadUrl(PACKAGED_ORIGIN+"/tv");});},"cleanrep-home-start").start();
+  // On the emulator only, `am start --es cleanrep.lan_host <laptop-ip>` names the relay address phones dial (HomeServer).
+  final String lanHost=getIntent().getStringExtra(HomeServer.LAN_HOST_EXTRA);
+  final WebView page=web;new Thread(()->{HomeServer.rememberLanHost(this,lanHost);HomeServer.start(this);runOnUiThread(()->{if(!destroyed&&web==page)page.loadUrl(PACKAGED_ORIGIN+"/tv");});},"cleanrep-home-start").start();
  }
  private boolean isPackaged(String url){return url.equals(PACKAGED_ORIGIN)||url.startsWith(PACKAGED_ORIGIN+"/");}
  private WebResourceResponse blocked(){return new WebResourceResponse("text/plain","UTF-8",403,"Forbidden",null,new ByteArrayInputStream(new byte[0]));}

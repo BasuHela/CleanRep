@@ -119,6 +119,22 @@ public final class Listeners implements Closeable {
   }
 
   /**
+   * Whether `host` is a strict dotted-quad private IPv4 literal (10/8, 172.16/12, 192.168/16), with no leading
+   * zeros and no DNS lookup: the phone app's `PhonePolicy.isPrivateNonLoopbackHost`, so the TV only advertises an
+   * address the phone will pair with.
+   */
+  public static boolean isPrivateIPv4(String host) {
+    if (host == null || !host.matches("(0|[1-9][0-9]{0,2})(\\.(0|[1-9][0-9]{0,2})){3}")) return false;
+    String[] parts = host.split("\\.");
+    int[] octets = new int[4];
+    for (int i = 0; i < 4; i++) {
+      octets[i] = Integer.parseInt(parts[i]);
+      if (octets[i] > 255) return false;
+    }
+    return octets[0] == 10 || (octets[0] == 172 && octets[1] >= 16 && octets[1] <= 31) || (octets[0] == 192 && octets[1] == 168);
+  }
+
+  /**
    * A private IPv4 address of this device, the one a phone on the same network dials, or null. Wi-Fi first, then
    * Ethernet, then anything else that is up, skipping loopback, tunnels and container bridges.
    */

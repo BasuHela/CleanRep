@@ -17,6 +17,7 @@ Problems we hit with Amazon tools and guidance while building CleanRep for Fire 
 | FL-004 | Fire TV hybrid app layout | Medium | A WebView lays out at 960×540 CSS px, while Amazon's web-app guide says 1920×1080 |
 | FL-005 | Fire OS hybrid app with a live camera view | Medium | The TV app died during a set; a renderer-crash handler was added; the cause is unconfirmed |
 | FL-006 | AWS hosting for a small companion API | Medium | There was no simple AWS home with HTTPS and a role, which is why the server moved into the TV app |
+| FL-007 | Fire OS testing on the Android TV stand-in | Medium | The stand-in's Google Cast service holds port 8443, so the TV app's server could not start |
 
 ## Entries
 
@@ -83,4 +84,16 @@ Problems we hit with Amazon tools and guidance while building CleanRep for Fire 
 - **Workaround used:** `make host` (`infra/host.py`) runs the API on one Lightsail nano node in fixture mode, which needs no AWS permissions, with the image in a private ECR repository pulled through the puller role. Bedrock (AWS mode) stays on the developer's machine. **Not yet deployed:** nothing in this entry was run against AWS.
 - **Actionable suggestion:** Let a Lightsail container service assume an application IAM role, as it already does for ECR pulls. Or add a "small HTTPS container after App Runner" page that names the cheapest path with a role and no load balancer.
 - **Evidence:** the development repo's `DEPLOYMENT.md` (Hosted section), `infra/host.py`, `tests/test_host.py`.
-- **What happened next (20 Oct):** we dropped hosting altogether. The session server became a Java port that runs inside the Fire TV app, and the phone uses a small app pinned to the TV's own certificate. That is CleanRep's design (`ARCHITECTURE.md`). The hosted mode was never deployed and is not part of CleanRep.
+- **What happened next (20 Oct):** we dropped hosting altogether.
+
+### FL-007 · The Android TV stand-in's Google Cast service holds port 8443
+- **Date / reporter:** 2026-10-21 · CleanRep coordinator (Claude Code) with the developer
+- **Tool and version:** Android TV API 30 x86 image with Google APIs (AVD `firetv_api30`, the FL-003 stand-in), which includes Google Cast (`com.google.android.apps.mediashell`); CleanRep TV debug APK `org.cleanrep.tv` 0.1.0.
+- **Task attempted:** Run the session server inside the TV app on the emulator for the first time (device test 3). Before CleanRep, the server ran on a laptop, so the emulator never opened a port.
+- **Steps taken:** 1. `make tv-install` on `emulator-5554`. 2. `adb -s emulator-5554 logcat -s CleanRep`. 3. `netstat -tlnp` in the emulator, then `/proc/net/tcp6` for the socket's uid, then `pm list packages --uid`.
+- **Expected result:** `CleanRep: home server ready, phone link …`.
+- **Actual result:** `CleanRep: home server could not start`, `java.io.IOException: cannot listen on 0.0.0.0:8443: bind failed: EADDRINUSE (Address already in use)`. The emulator already listens on `:::8443` with uid 10047, which is `com.google.android.apps.mediashell`, Google's Cast receiver. 8443 is Cast's secure port, and it also holds 8008 and 8009.
+- **Severity:** Medium (the TV app can't start its server on the stand-in until Cast is off).
+- **Workaround used:** `pm disable-user --user 0 com.google.android.apps.mediashell`, then `am force-stop` on it. Port 8443 was free, and after a restart CleanRep logged `home server ready`. Through `adb forward tcp:8443 tcp:8443`, `GET /v1/healthz` answered 200. The setting survives emulator restarts; `pm enable` undoes it. Fire OS has no Google Cast, so a Fire TV should not have this conflict, but no Fire TV has been checked.
+- **Actionable suggestion:** This is another way an Android TV stand-in differs from Fire OS (FL-003). A list of the services and ports each Fire OS release reserves, next to Amazon's "Use an Android TV emulator" guide, would let hybrid apps that serve on the LAN choose a port that is free on both.
+- **Evidence:** `docs/device-tests.md` test 3, step 1; `apps/tv/android/app/src/main/java/org/cleanrep/tv/HomeServer.java` (`Listeners.bind` on 8105 and 8443). The session server became a Java port that runs inside the Fire TV app, and the phone uses a small app pinned to the TV's own certificate. That is CleanRep's design (`ARCHITECTURE.md`). The hosted mode was never deployed and is not part of CleanRep.

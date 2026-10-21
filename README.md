@@ -48,14 +48,14 @@ This is the J-1 browser journey, which `make browser-test` runs with D-pad keys 
 |---|---|
 | The session server (pairing, plan, sets, faults, drill and re-test, recovery, limits, camera view) | **Verified on the JVM:** 98 Java tests, including 8 journeys (419 requests) recorded from the reference server it was ported from, real TLS handshakes, and the entry point |
 | The phone app's network rules and TLS pinning | **Verified on the JVM:** 11 Java tests, with real handshakes |
-| TV and phone pages, rep logic, abstention when the view is unclear | **Verified:** 143 Vitest tests, on synthetic landmarks only |
+| TV and phone pages, rep logic, abstention when the view is unclear | **Verified:** 149 Vitest tests, on synthetic landmarks only |
 | The whole journey in a browser: D-pad only, drill, re-test, recap, restart, phone loss, request privacy, live camera view | **Verified in desktop Chrome:** 10 Playwright journeys against the Java server |
 | The TV and phone APKs | Debug builds succeed, and Android Lint finds no API above Fire OS's Android 7.1 (API 25) |
-| CleanRep on the Fire OS emulator with the phone app on a real phone | **NOT RUN yet** ([device tests](docs/device-tests.md)) |
+| CleanRep on the Fire OS emulator with the phone app on a real phone | **Worked as expected on 21 Oct (developer-reported):** the phone on Wi-Fi with no debugging, through the laptop relay ([device test 3b](docs/device-tests.md)). Details not yet recorded |
 | A physical Fire TV stick on home Wi-Fi | **NOT RUN.** No hardware |
 | Rep accuracy on real people, usability with real users | **NOT RUN.** No user study; no accuracy claim |
 
-The previous version ran its server on a laptop. One live 10-squat set on a OnePlus Nord 4 with the Fire OS app on the emulator worked end to end on 19 Oct (developer-reported). CleanRep moves that server into the TV app; that combination has not run on a device yet. See [LIMITATIONS.md](LIMITATIONS.md).
+The previous version ran its server on a laptop. One live 10-squat set on a OnePlus Nord 4 with the Fire OS app on the emulator worked end to end on 19 Oct (developer-reported). CleanRep moves that server into the TV app. On 21 Oct that combination worked with a real phone and the TV app on the emulator (developer-reported). See [LIMITATIONS.md](LIMITATIONS.md).
 
 ## Build from source
 
@@ -71,6 +71,7 @@ You need JDK 17+, Node 22, and the Android SDK with `platforms;android-35` and `
 | `make server` | The server on this computer's Wi-Fi, for a phone test without a TV ([device tests](docs/device-tests.md)) |
 | `make tv-build` / `make tv-install` | The TV app's debug APK, with the phone APK packed inside; install with `CLEANREP_ADB_SERIAL=<serial>` |
 | `make phone-build` / `make phone-install` | The phone app's debug APK on its own |
+| `make lan-relay` | The TV app on the emulator, reachable on this computer's Wi-Fi by a phone with no debugging turned on ([device tests](docs/device-tests.md) 3b) |
 
 Build outputs: `apps/tv/android/app/build/outputs/apk/debug/app-debug.apk` (TV, about 28 MB, includes the phone APK) and `apps/phone/android/app/build/outputs/apk/debug/app-debug.apk` (phone, about 14 MB). Both are debug builds; a release build is refused for now ([LIMITATIONS.md](LIMITATIONS.md)).
 

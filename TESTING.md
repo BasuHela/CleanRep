@@ -1,15 +1,15 @@
 # Testing
 
-Latest run (20 Oct 2026, on this repository):
+Latest run (21 Oct 2026, on this repository; Gradle `lintDebug` last ran on 20 Oct):
 
 | Command | Result |
 |---|---|
 | `make core-test` | **98 passed**: the session server on the JVM |
 | `make phone-test` | **11 passed**: the phone app's network rules and TLS pinning |
-| `make web-test` | **143 passed** in 22 files (Vitest) |
+| `make web-test` | **149 passed** in 23 files (Vitest) |
 | `make lint`, `make typecheck` | Prettier and TypeScript: clean |
 | `make browser-test` | **10 passed** in 1.1 min: Playwright journeys in Chrome against the Java server |
-| `make tv-build`, Gradle `lintDebug` | TV debug APK 27,512,370 bytes, with the 13,720,487-byte phone APK inside; Lint warnings only, none NewApi |
+| `make tv-build`, Gradle `lintDebug` | TV debug APK 27,544,642 bytes from a clean build, with the 13,751,787-byte phone APK inside; Lint warnings only, none NewApi. Repeated incremental builds can leave the APK about 14 MB larger, with the same contents, so build a release candidate from clean |
 | `make phone-build`, Gradle `lintDebug` | Phone debug APK; Lint warnings only, none NewApi |
 
 Every test name starts with an ID, such as `C-HTTP-5` or `W-PHN-2`. The families are below.
@@ -41,13 +41,14 @@ P-APP-1..11 run on the JVM without Android:
 - the packaged origin's asset paths and MIME types;
 - real TLS handshakes: a matching pin succeeds, another certificate's pin fails, and `HttpsURLConnection` pins end to end.
 
-## The pages: `make web-test` (143)
+## The pages: `make web-test` (149)
 
 Vitest covers:
 - the TV pages: focus, labels, the coach banner, continuity, the QR encoder, checked against external decoders;
 - the phone pages: pairing, camera errors, the transport queue, partial notices, the camera view;
 - the pose pipeline: geometry, reps, holds, abstention, and replayed synthetic squat recordings;
-- the app bridge: W-HOME-1..11.
+- the app bridge: W-HOME-1..11;
+- the emulator's Wi-Fi relay, `scripts/lan-relay.mjs` (W-RLY-1..6): every spelling of `/v1` refused on 8105 without reaching the TV, pages passed through, 8443 bytes passed through untouched, and a missing TV.
 
 ## The journeys: `make browser-test` (10)
 
@@ -66,4 +67,4 @@ Playwright starts `org.cleanrep.core.Main` on 8125 with an empty `var/browser-da
 
 ## Not automated
 
-The device tests in [docs/device-tests.md](docs/device-tests.md) are manual and NOT RUN: the phone app's camera on a real phone, pairing over Wi-Fi, the TV app on the Fire OS emulator, memory with the camera view on, and a physical Fire TV.
+The device tests in [docs/device-tests.md](docs/device-tests.md) are manual. Test 3b, the TV app on the emulator with a real phone on Wi-Fi, worked as expected on 21 Oct (developer-reported). The rest are NOT RUN: the phone app's camera check, pairing with the laptop server, the emulator over adb relays and its memory with the camera view on, and a physical Fire TV.

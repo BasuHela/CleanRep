@@ -197,6 +197,13 @@ public class MainTest {
       Check.equal(Arrays.asList("https://localhost:8443", "https://127.0.0.1:8443"), new ArrayList<>(Listeners.phoneOrigins(null, 8443)));
       Check.equal("http://192.168.1.20:8105/phone", Listeners.phoneUrl("192.168.1.20", 8105));
       Check.equal(null, Listeners.phoneUrl(null, 8105));
+      // The TV only advertises an address the phone app accepts: the same rule as PhonePolicy, compiled in from apps/phone.
+      for (String host : Arrays.asList("10.217.25.162", "10.0.0.0", "172.16.0.1", "172.31.255.255", "192.168.1.20",
+          "172.15.0.1", "172.32.0.1", "192.169.1.1", "127.0.0.1", "8.8.8.8", "010.1.1.1", "10.1.1", "10.1.1.1.1",
+          "10.256.1.1", "10.1.1.1 ", "localhost", "", "1e1.1.1.1", "١٠.1.1.1")) {
+        Check.isTrue(org.cleanrep.phone.PhonePolicy.isPrivateNonLoopbackHost(host) == Listeners.isPrivateIPv4(host), "same rule for " + host);
+      }
+      Check.isTrue(Listeners.isPrivateIPv4("10.217.25.162") && !Listeners.isPrivateIPv4(null), "private and null");
       // A busy port fails before the store is opened, so nothing is left locked.
       try (ServerSocket busy = new ServerSocket(0, 5, InetAddress.getByName("127.0.0.1"))) {
         Main.Options clash = options(dir, false);

@@ -1,5 +1,5 @@
 export npm_config_cache := /tmp/amazon-devpost-cleanrep/npm
-.PHONY: setup test core-test phone-test web-test lint typecheck build browser-test demo server tv-build tv-install phone-build phone-install
+.PHONY: setup test core-test phone-test web-test lint typecheck build browser-test demo server tv-build tv-install phone-build phone-install lan-relay
 setup:
 	npm --prefix apps/web ci
 	$(MAKE) build
@@ -41,3 +41,7 @@ phone-build:
 	bash scripts/phone-build.sh
 phone-install:
 	bash scripts/phone-install.sh
+# The TV app on the emulator, reachable on this computer's Wi-Fi by a phone with no debugging (device test 3b).
+# Needs `adb forward` of 8105 and 8443 first; HOST=<wifi-ip> picks the address (default: the Wi-Fi one).
+lan-relay:
+	node scripts/lan-relay.mjs $(HOST)

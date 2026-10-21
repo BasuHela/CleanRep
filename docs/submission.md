@@ -60,7 +60,7 @@ CleanRep is a short bodyweight-strength session for the living room, run with th
 - **Tests:**
   - 98 Java tests for the server, including real TLS handshakes against the phone app's own pinning code;
   - 11 Java tests for the phone app;
-  - 143 Vitest tests;
+  - 149 Vitest tests;
   - 10 Playwright journeys in Chrome against the Java server, which drive the TV with D-pad keys only.
 - **(optional) How we worked:** coding agents (Claude Code, OpenAI Codex, and the Google Antigravity CLI), each in a sandbox with its own worktree. A coordinating Claude Code session reviewed, tested and merged each change, and the developer made the product decisions and ran the devices.
 
@@ -102,12 +102,13 @@ CleanRep is a short bodyweight-strength session for the living room, run with th
 
 ## Product feedback (Devpost field)
 
-> Our friction log, `docs/friction-log.md`, records five problems we hit with Amazon tools, each with versions, exact errors, workarounds and a suggestion:
+> Our friction log, `docs/friction-log.md`, records six problems we hit with Amazon tools, each with versions, exact errors, workarounds and a suggestion:
 > - FL-002: an Android Gradle Plugin preferences-folder conflict that shows only with `--stacktrace`;
 > - FL-003: no Fire OS 8 emulator, and a stand-in whose WebView drifts;
 > - FL-004: a WebView's 960×540 default viewport against the 1920×1080 web-app guidance;
 > - FL-005: a hybrid-app crash with a live camera view;
-> - FL-006: no simple AWS home for a small HTTPS API with a role after App Runner's closure to new customers, which is why the server moved into the TV app.
+> - FL-006: no simple AWS home for a small HTTPS API with a role after App Runner's closure to new customers, which is why the server moved into the TV app;
+> - FL-007: the Android TV stand-in's Google Cast service holds port 8443, so the TV app's server could not start there.
 
 ## Category and challenges
 
@@ -119,4 +120,5 @@ CleanRep is a short bodyweight-strength session for the living room, run with th
 Update these once the device tests run:
 - **Verified:** the server, the phone app's network code, the pages and 10 browser journeys (automated); both APKs build and pass Android Lint.
 - **Ran once:** the earlier, laptop-server version did one live 10-squat set with a OnePlus Nord 4 and the Fire OS app on the emulator, on 19 Oct (developer-reported).
-- **NOT RUN:** CleanRep on the emulator and a phone; a physical Fire TV; accuracy on real people; any user study.
+- **Worked, developer-reported (21 Oct):** CleanRep's TV app on the emulator with a real Android phone on Wi-Fi, no debugging on the phone, through the laptop relay (device test 3b). The phone model and checks are not recorded yet.
+- **NOT RUN:** a physical Fire TV; accuracy on real people; any user study.
