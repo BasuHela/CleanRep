@@ -9,3 +9,5 @@ apps/web/playwright-report/
 **/build/
 local.properties
 temp/
+laptop.webm
+phone.mp4
