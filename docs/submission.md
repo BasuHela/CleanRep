@@ -3,10 +3,11 @@
 The text to paste into Devpost for the Amazon "Build, Ship, Shape" hackathon, **Fire TV track**. The deadline is 23 Oct 2026, 12:00 PDT (24 Oct, 00:30 IST).
 
 **Before submitting, the developer still has to:**
-- [ ] Create the GitHub repository and push this one. Either make it public (the MIT `LICENSE` is at the root), or keep it private and add the reviewers `chris-trag`, `knmeiss`, `giolaq`, `anishamalde`, `mosesroth` and `emersonsklar`.
+- [x] Create the GitHub repository and push this one (private, 21 Oct).
+- [ ] Share the private repository: add `knmeiss`, `giolaq`, `anishamalde`, `mosesroth` and `emersonsklar` as collaborators, and invite `testing@devpost.com`. Invitations expire after 7 days, so send them when submitting.
 - [ ] Attach `cleanrep-tv-0.1.0-debug.apk` and `cleanrep-phone-0.1.0-debug.apk` to a GitHub release, built with `make tv-build` from the tagged commit. [Judge instructions](judge-instructions.md) use these names.
 - [ ] Run the [device tests](device-tests.md). Then update the status lines below, the README table and [LIMITATIONS.md](../LIMITATIONS.md) with what actually ran.
-- [ ] Record the video, under 3 minutes, showing the Fire OS app with the CleanRep name. Upload it publicly to YouTube or Vimeo. If the TV is the emulator, caption it "Fire OS app on the Android TV emulator".
+- [x] Record the video, under 3 minutes, showing the Fire OS app with the CleanRep name, captioned "Fire OS app on the Android TV emulator": https://youtu.be/M6GG9d21bzE (2:07). The current rules ask for an actual Fire TV device or the Fire TV/Vega simulator; confirm with the organizers that the emulator is accepted.
 - [ ] Re-read the official rules and FAQ in a browser. These notes come from a 14–15 Oct reading.
 
 Lines marked **(optional)** can go if space is short. Keep every claim at its status: nothing here may say more than the repository shows.
@@ -120,5 +121,5 @@ CleanRep is a short bodyweight-strength session for the living room, run with th
 Update these once the device tests run:
 - **Verified:** the server, the phone app's network code, the pages and 10 browser journeys (automated); both APKs build and pass Android Lint.
 - **Ran once:** the earlier, laptop-server version did one live 10-squat set with a OnePlus Nord 4 and the Fire OS app on the emulator, on 19 Oct (developer-reported).
-- **Worked, developer-reported (21 Oct):** CleanRep's TV app on the emulator with a real Android phone on Wi-Fi, no debugging on the phone, through the laptop relay (device test 3b). The phone model and checks are not recorded yet.
+- **Worked, developer-reported (21 Oct):** CleanRep's TV app on the emulator with a OnePlus Nord 4 on Wi-Fi, no debugging on the phone, through the laptop relay (device test 3b). The demo video is a recording of this run.
 - **NOT RUN:** a physical Fire TV; accuracy on real people; any user study.

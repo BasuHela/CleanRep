@@ -51,7 +51,7 @@ This is the J-1 browser journey, which `make browser-test` runs with D-pad keys 
 | TV and phone pages, rep logic, abstention when the view is unclear | **Verified:** 149 Vitest tests, on synthetic landmarks only |
 | The whole journey in a browser: D-pad only, drill, re-test, recap, restart, phone loss, request privacy, live camera view | **Verified in desktop Chrome:** 10 Playwright journeys against the Java server |
 | The TV and phone APKs | Debug builds succeed, and Android Lint finds no API above Fire OS's Android 7.1 (API 25) |
-| CleanRep on the Fire OS emulator with the phone app on a real phone | **Worked as expected on 21 Oct (developer-reported):** the phone on Wi-Fi with no debugging, through the laptop relay ([device test 3b](docs/device-tests.md)). Details not yet recorded |
+| CleanRep on the Fire OS emulator with the phone app on a real phone | **Worked as expected on 21 Oct (developer-reported):** a OnePlus Nord 4 on Wi-Fi with no debugging, through the laptop relay ([device test 3b](docs/device-tests.md)). The [demo video](https://youtu.be/M6GG9d21bzE) shows the run |
 | A physical Fire TV stick on home Wi-Fi | **NOT RUN.** No hardware |
 | Rep accuracy on real people, usability with real users | **NOT RUN.** No user study; no accuracy claim |
 

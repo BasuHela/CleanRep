@@ -2,7 +2,7 @@
 
 ## Not yet run on a device
 
-- **One device run so far.** Everything in this repository is verified on the JVM, in desktop Chrome, and by building both APKs with Android Lint. On devices, one run is developer-reported: on 21 Oct, the TV app on the emulator with a real Android phone on Wi-Fi worked as expected ([device test 3b](docs/device-tests.md)). The phone model and the checks made are not recorded yet. Still NOT RUN as written tests:
+- **One device run so far.** Everything in this repository is verified on the JVM, in desktop Chrome, and by building both APKs with Android Lint. On devices, one run is developer-reported: on 21 Oct, the TV app on the emulator with a real Android phone on Wi-Fi worked as expected ([device test 3b](docs/device-tests.md)). The phone was a OnePlus Nord 4; its Android version is not recorded. The [demo video](https://youtu.be/M6GG9d21bzE) shows what that run covered: the TV handing over the phone app, pairing with a matching number, the camera checks, one 10-rep squat set with shallow attempts not counted, the recap, and End and delete. Still NOT RUN as written tests:
   - device tests 1 to 3, including the TV app's memory with the camera view on;
   - a physical Fire TV on Wi-Fi.
 - **What did run, before the move.** The earlier version ran its server on a laptop. One live 10-squat set with a OnePlus Nord 4 (in Chrome) and the Fire OS app on the emulator worked end to end on 19 Oct (developer-reported).

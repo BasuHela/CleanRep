@@ -156,7 +156,7 @@ Allow the camera when Android asks. That first request is itself a check: the ap
 
 **Clean up:** Ctrl-C the relay, `$ADB forward --remove-all`, and remove the firewall rule with `sudo ufw delete allow from <wifi-subnet> to any port 8105,8443 proto tcp`. To make the TV advertise its own address again, launch it with `--es cleanrep.lan_host ""`.
 
-**Result:** worked as expected on 21 Oct (developer-reported), with a real Android phone on Wi-Fi and no debugging turned on. The phone model, Android version and which checks above were made are not recorded yet. Before that, the same day, from the laptop:
+**Result:** worked as expected on 21 Oct (developer-reported), with a OnePlus Nord 4 on Wi-Fi and no debugging turned on; its Android version is not recorded. The [demo video](https://youtu.be/M6GG9d21bzE) was recorded from this run. It shows the phone downloading and installing the phone app from the TV, pairing with the same 4-digit number on both screens, the camera checks, one 10-rep squat set in which shallow attempts were not counted and the first counted rep was flagged for depth, the recap, and End and delete ending the session on the phone. Before that, the same day, from the laptop:
 - the QR code on the emulator's TV named `http://10.217.25.162:8105/phone`;
 - the landing page and the phone APK came through the relay;
 - `/v1/healthz` on 8105 answered 403 `https_required`;
