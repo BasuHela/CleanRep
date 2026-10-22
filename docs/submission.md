@@ -129,7 +129,7 @@ CleanRep is a short bodyweight-strength session for the living room, run with th
 
 ## Existed before the hackathon? (Devpost field)
 
-> No. Work on CleanRep started after the Submission Period opened on 31 Aug 2026. Its working name was FormLab, which still appears in older notes in the repository.
+> No. Work on CleanRep started after the Submission Period opened on 31 Aug 2026. Its working name was FormLab, which still appears in older notes in the repository. ReplayLab, whose code CleanRep reuses under the MIT licence (`LICENSE.replaylab`), is also the developer's own and was also started after 31 Aug 2026.
 
 ## Category and challenges
 
