@@ -104,6 +104,20 @@ CleanRep is a short bodyweight-strength session for the living room, run with th
 
 ## Product feedback (Devpost field)
 
+> **Why Fire TV:** my parents have watched TV on a Fire TV Stick for a few years. That is the main reason I chose this track: CleanRep is meant to be something they use at home, on the screen they already sit in front of, with the remote they already know. That shaped the design: D-pad only, large text, no account, and a remote-only mode for when the phone isn't to hand.
+>
+> **Fire TV hybrid (WebView) app model, on Fire OS.** *Used for:* the TV app, a small Java shell that runs the session server and shows TypeScript screens in a WebView. *Worked well:* one web UI for the TV and the phone; Amazon's D-pad focus guidance was clear; plain Java 8 ran inside the app with no extra setup. *Needs work:* a WebView lays out at 960×540 CSS px while the web-app guide says 1920×1080 (FL-004), and the Amazon WebView version per Fire OS release isn't published (FL-003). *Getting started:* building the APK was quick; testing it without hardware was the hard part. *Again?* Yes: this is the screen my parents use.
+>
+> **Amazon developer docs and testing without hardware.** *Used for:* targets, layout and testing. *Needs work:* there is no Fire OS emulator; the "Use an Android TV emulator" guide now returns 404; the Android TV stand-in differs from Fire OS (its WebView updates on its own, and Google Cast holds port 8443); and the hackathon's video rule names only a Fire TV device or the Vega simulator, which can't run Fire OS apps (FL-003, FL-007, FL-008). *Again?* Yes, with a published list of how the stand-in differs from Fire OS.
+>
+> **Vega OS (considered, not used).** New Fire TV Sticks run Vega OS, so a Vega version is next. Before porting, we need to know whether a Vega app may accept connections from a phone on the home network, and the Vega Virtual Device's WebView works only on Apple-silicon Macs (FL-008).
+>
+> **Android SDK and Gradle.** *Used for:* building both APKs. *Needs work:* a preferences-folder conflict that shows only with `--stacktrace` (FL-002).
+>
+> **AWS (evaluated, not shipped).** *Used for:* an early hosted-API plan. *Needs work:* no simple managed HTTPS home for a small API with a role after App Runner closed to new customers (FL-006). That is why the server moved into the TV app, which also keeps everything in the home.
+>
+> **Other tools:** MediaPipe Pose Landmarker (pose tracking on the phone), Vite, Vitest and Playwright (build and tests), coding agents (Claude Code, OpenAI Codex, Google Antigravity CLI) and ElevenLabs (video narration).
+>
 > Our friction log, `docs/friction-log.md`, records seven problems we hit with Amazon tools, each with versions, exact errors, workarounds and a suggestion:
 > - FL-002: an Android Gradle Plugin preferences-folder conflict that shows only with `--stacktrace`;
 > - FL-003: no Fire OS 8 emulator, and a stand-in whose WebView drifts;
@@ -112,6 +126,10 @@ CleanRep is a short bodyweight-strength session for the living room, run with th
 > - FL-006: no simple AWS home for a small HTTPS API with a role after App Runner's closure to new customers, which is why the server moved into the TV app;
 > - FL-007: the Android TV stand-in's Google Cast service holds port 8443, so the TV app's server could not start there;
 > - FL-008: the video rule names the Fire TV/Vega simulator, which can't run Fire OS apps; Amazon has no Fire OS emulator, its emulator guide now returns 404, and the Vega Virtual Device's WebView works only on Apple-silicon Macs.
+
+## Existed before the hackathon? (Devpost field)
+
+> No. Work on CleanRep started after the Submission Period opened on 31 Aug 2026. Its working name was FormLab, which still appears in older notes in the repository.
 
 ## Category and challenges
 
