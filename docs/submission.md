@@ -5,7 +5,7 @@ The text to paste into Devpost for the Amazon "Build, Ship, Shape" hackathon, **
 **Before submitting, the developer still has to:**
 - [x] Create the GitHub repository and push this one (private, 21 Oct).
 - [ ] Share the private repository: add `knmeiss`, `giolaq`, `anishamalde`, `mosesroth` and `emersonsklar` as collaborators, and invite `testing@devpost.com`. Invitations expire after 7 days, so send them when submitting.
-- [ ] Attach `cleanrep-tv-0.1.0-debug.apk` and `cleanrep-phone-0.1.0-debug.apk` to a GitHub release, built with `make tv-build` from the tagged commit. [Judge instructions](judge-instructions.md) use these names.
+- [x] Attach `cleanrep-tv-0.1.0-debug.apk` and `cleanrep-phone-0.1.0-debug.apk` to a GitHub release, built with `make tv-build` from the tagged commit (release `v0.1.0`, commit `689f789`, 22 Oct). [Judge instructions](judge-instructions.md) use these names.
 - [ ] Run the [device tests](device-tests.md). Then update the status lines below, the README table and [LIMITATIONS.md](../LIMITATIONS.md) with what actually ran.
 - [x] Record the video, under 3 minutes, showing the Fire OS app with the CleanRep name, captioned "Fire OS app on the Android TV emulator": https://youtu.be/M6GG9d21bzE (2:07). The current rules ask for an actual Fire TV device or the Fire TV/Vega simulator; confirm with the organizers that the emulator is accepted.
 - [ ] Re-read the official rules and FAQ in a browser. These notes come from a 14–15 Oct reading.
@@ -100,7 +100,7 @@ CleanRep is a short bodyweight-strength session for the living room, run with th
 
 ## Testing instructions (Devpost field)
 
-> Install `cleanrep-tv-0.1.0-debug.apk` from the GitHub release on a Fire OS device (adb or Downloader). Open CleanRep, select Start a session, and scan the QR code with an Android phone on the same Wi-Fi: the TV offers the phone app. With no Android phone, select **Use remote only**. With no Fire TV, `make setup && make demo` runs the same server in a desktop browser. Full steps: `docs/judge-instructions.md`.
+> Download `cleanrep-tv-0.1.0-debug.apk` from the repository's v0.1.0 release (signed in to GitHub, since the repository is private) and install it on a Fire OS device with adb. Open CleanRep, select Start a session, and scan the QR code with an Android phone on the same Wi-Fi: the TV offers the phone app. With no Android phone, select **Use remote only**. With no Fire TV, `make setup && make demo` runs the same server in a desktop browser. Full steps: `docs/judge-instructions.md`.
 
 ## Product feedback (Devpost field)
 

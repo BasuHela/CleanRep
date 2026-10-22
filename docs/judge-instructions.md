@@ -10,7 +10,7 @@ CleanRep needs a Fire OS device and, for the camera, an Android phone on the sam
 |---|---|
 | TV | A Fire TV with **Fire OS** (6, 7 or 8, for example the Fire TV Stick 4K Max). Vega OS devices can't install APKs. Or the Android TV emulator (path C). |
 | Phone | Android 9 or later, on the **same Wi-Fi** as the TV. A guest network that keeps devices apart won't work. iPhones have no CleanRep app: use path B. |
-| Files | From the repository's **Releases** page: `cleanrep-tv-0.1.0-debug.apk`. The phone app is inside it, and the TV hands it to the phone. Both are debug builds. |
+| Files | From the repository's **Releases** page (release `v0.1.0`): `cleanrep-tv-0.1.0-debug.apk`. The phone app is inside it, and the TV hands it to the phone. Both are debug builds. The repository is private, so its release files download only in a browser signed in to a GitHub account with access to it. |
 | Space | About 3 m in front of the TV, and something to prop the phone up to your side, at hip height. |
 
 ## A. Fire TV and an Android phone (the full experience)
@@ -27,7 +27,7 @@ CleanRep needs a Fire OS device and, for the camera, an Android phone on the sam
    adb -s <tv-ip>:5555 install -r cleanrep-tv-0.1.0-debug.apk
    ```
 
-   Without a computer, use the Downloader app with the APK's Releases link. Turn on **Install unknown apps** for Downloader in Developer options first.
+   Download the APK on the computer first, signed in to GitHub. The Downloader app on the Fire TV can't sign in to GitHub, so it can't fetch release files from this private repository: install from a computer while the repository is private.
 5. **Open CleanRep** from **Your apps & channels**. The session server starts inside the app. If the TV says *CleanRep's server on this TV isn't answering*, close CleanRep and open it again.
 
 ### 2. Pair the phone (the first time takes two scans)
