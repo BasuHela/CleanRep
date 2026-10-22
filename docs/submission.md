@@ -92,6 +92,7 @@ CleanRep is a short bodyweight-strength session for the living room, run with th
 - **A safer first scan:** derive the pairing number from the TV's certificate, so the first scan is protected too.
 - **A release build** with no debug logging.
 - **More exercises and a front view,** for knee tracking.
+- **A Vega OS version of the TV app,** since new Fire TV Sticks run Vega OS. The TV screens are already web code; the first step is checking that a Vega app can host the session server for the phone on the home network ([FL-008](friction-log.md)).
 
 ## Built with
 
@@ -103,13 +104,14 @@ CleanRep is a short bodyweight-strength session for the living room, run with th
 
 ## Product feedback (Devpost field)
 
-> Our friction log, `docs/friction-log.md`, records six problems we hit with Amazon tools, each with versions, exact errors, workarounds and a suggestion:
+> Our friction log, `docs/friction-log.md`, records seven problems we hit with Amazon tools, each with versions, exact errors, workarounds and a suggestion:
 > - FL-002: an Android Gradle Plugin preferences-folder conflict that shows only with `--stacktrace`;
 > - FL-003: no Fire OS 8 emulator, and a stand-in whose WebView drifts;
 > - FL-004: a WebView's 960×540 default viewport against the 1920×1080 web-app guidance;
 > - FL-005: a hybrid-app crash with a live camera view;
 > - FL-006: no simple AWS home for a small HTTPS API with a role after App Runner's closure to new customers, which is why the server moved into the TV app;
-> - FL-007: the Android TV stand-in's Google Cast service holds port 8443, so the TV app's server could not start there.
+> - FL-007: the Android TV stand-in's Google Cast service holds port 8443, so the TV app's server could not start there;
+> - FL-008: the video rule names the Fire TV/Vega simulator, which can't run Fire OS apps; Amazon has no Fire OS emulator, its emulator guide now returns 404, and the Vega Virtual Device's WebView works only on Apple-silicon Macs.
 
 ## Category and challenges
 
