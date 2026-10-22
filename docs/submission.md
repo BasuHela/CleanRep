@@ -4,7 +4,7 @@ The text to paste into Devpost for the Amazon "Build, Ship, Shape" hackathon, **
 
 **Before submitting, the developer still has to:**
 - [x] Create the GitHub repository and push this one (private, 21 Oct).
-- [ ] Share the private repository: add `knmeiss`, `giolaq`, `anishamalde`, `mosesroth` and `emersonsklar` as collaborators, and invite `testing@devpost.com`. Invitations expire after 7 days, so send them when submitting.
+- [x] Share the private repository: add `knmeiss`, `giolaq`, `anishamalde`, `mosesroth` and `emersonsklar` as collaborators, and invite `testing@devpost.com`. Invitations expire after 7 days, so send them when submitting. (Sent 22 Oct; submitted on Devpost the same day.)
 - [x] Attach `cleanrep-tv-0.1.0-debug.apk` and `cleanrep-phone-0.1.0-debug.apk` to a GitHub release, built with `make tv-build` from the tagged commit (release `v0.1.0`, commit `689f789`, 22 Oct). [Judge instructions](judge-instructions.md) use these names.
 - [ ] Run the [device tests](device-tests.md). Then update the status lines below, the README table and [LIMITATIONS.md](../LIMITATIONS.md) with what actually ran.
 - [x] Record the video, under 3 minutes, showing the Fire OS app with the CleanRep name, captioned "Fire OS app on the Android TV emulator": https://youtu.be/M6GG9d21bzE (2:07). The current rules ask for an actual Fire TV device or the Fire TV/Vega simulator; confirm with the organizers that the emulator is accepted.
